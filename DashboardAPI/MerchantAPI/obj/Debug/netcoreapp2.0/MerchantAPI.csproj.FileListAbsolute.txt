@@ -1,0 +1,11 @@
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\bin\Debug\netcoreapp2.0\MerchantAPI.deps.json
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\bin\Debug\netcoreapp2.0\MerchantAPI.runtimeconfig.json
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\bin\Debug\netcoreapp2.0\MerchantAPI.runtimeconfig.dev.json
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\bin\Debug\netcoreapp2.0\MerchantAPI.dll
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\bin\Debug\netcoreapp2.0\MerchantAPI.pdb
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.csprojResolveAssemblyReference.cache
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.csproj.CoreCompileInputs.cache
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.AssemblyInfoInputs.cache
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.AssemblyInfo.cs
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.dll
+C:\Users\Emmanuel\source\repos\NetPeyaCore\DashboardAPI\MerchantAPI\obj\Debug\netcoreapp2.0\MerchantAPI.pdb
