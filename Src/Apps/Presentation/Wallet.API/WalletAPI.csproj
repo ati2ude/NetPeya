@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
     <PackageReference Include="FluentValidation" Version="8.0.100" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.0.100" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
     <PackageReference Include="Seq.Extensions.Logging" Version="4.0.0" />
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\..\Logic\Common\NPCommon\NPCommon.csproj" />
     <ProjectReference Include="..\..\Logic\Wallet\Core\Wallet.Application\WalletApplication.csproj" />
     <ProjectReference Include="..\..\Logic\Wallet\Infrustructure\Wallet.Domain\WalletDomain.csproj" />
+    <ProjectReference Include="..\..\Logic\Wallet\Infrustructure\WalletInfrustructure\WalletInfrustructure.csproj" />
     <ProjectReference Include="..\..\Logic\Wallet\Infrustructure\WalletPersistence\WalletPersistence.csproj" />
   </ItemGroup>
 

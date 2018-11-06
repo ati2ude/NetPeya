@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MediatR.Pipeline;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NPCommon;
+using WalletAPI.Filters;
+using WalletApplication.Infrustructure;
+using WalletInfrustructure;
 using WalletPersistence;
+using WalletApplication.User.Commands;
+using WalletApplication.User.Commands.CreateUser;
 
 namespace WalletAPI
 {
@@ -45,7 +45,7 @@ namespace WalletAPI
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateWalletUserCommandValidator>());
 
             // Customise default API behavour
             services.Configure<ApiBehaviorOptions>(options =>

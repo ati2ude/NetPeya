@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WalletApplication.User.Commands.CreateUser
 {
-    class CreateWalletUserCommandValidator : AbstractValidator<CreateWalletUserCommand>
+    public class CreateWalletUserCommandValidator : AbstractValidator<CreateWalletUserCommand>
     {
         public CreateWalletUserCommandValidator()
         {

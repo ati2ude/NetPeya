@@ -6,7 +6,7 @@ using WalletDomain.Entities;
 
 namespace WalletApplication.User.Commands.CreateUser
 {
-    class CreateWalletUserCommandHandler : IRequestHandler<CreateWalletUserCommand, Unit>
+    public class CreateWalletUserCommandHandler : IRequestHandler<CreateWalletUserCommand, Unit>
     {
         //private readonly NorthwindDbContext _context;
         private readonly INotificationService _notificationService;
