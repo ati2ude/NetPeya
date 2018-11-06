@@ -21,7 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Logic\Common\NPCommon\NPCommon.csproj" />
     <ProjectReference Include="..\..\Logic\Wallet\Core\Wallet.Application\WalletApplication.csproj" />
+    <ProjectReference Include="..\..\Logic\Wallet\Infrustructure\Wallet.Domain\WalletDomain.csproj" />
+    <ProjectReference Include="..\..\Logic\Wallet\Infrustructure\WalletPersistence\WalletPersistence.csproj" />
   </ItemGroup>
 
 </Project>

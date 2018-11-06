@@ -4,7 +4,7 @@ using WalletPersistence.Extensions;
 
 namespace WalletPersistence
 {
-    class WalletDbContext : DbContext
+    public class WalletDbContext : DbContext
     {
         public WalletDbContext(DbContextOptions<WalletDbContext> options)
             : base(options)
