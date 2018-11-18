@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Wallet\Countries\Commands\DeleteCountry\" />
+    <Folder Include="Application\Wallet\Countries\Queries\" />
+    <Folder Include="Application\Wallet\Users\Commands\DeleteUser\" />
+    <Folder Include="Application\Wallet\Users\Commands\UpdateUser\" />
     <Folder Include="Application\Wallet\Users\Queries\" />
   </ItemGroup>
 
@@ -26,6 +30,18 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>System.Data</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>System.Xml</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

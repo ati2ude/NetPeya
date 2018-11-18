@@ -1,0 +1,113 @@
+﻿
+body {
+    padding: 0!important;
+}
+body:before {
+    background-color: #d2dbdc;
+}
+
+.all-wrapper {
+    max-width: initial;
+    border-radius: 0;
+}
+
+.full-np-w .full-np-middle {
+    min-height: 100vh;
+}
+
+.full-np-w .full-np-left {
+
+}
+
+.full-np-w .full-np-middle .np-head {
+    padding: 30px 20px;
+    border-bottom: none;
+}
+
+.full-np-w .full-np-middle .np-head input {
+    border: none;
+    width: auto;
+    background-color: transparent;
+}
+
+.full-np-w .full-np-middle .user-info{
+    font-size: 1.5rem;
+}
+
+.nav-link i {
+    color:inherit;
+}
+
+.full-np-w .full-np-middle .user-actions a {
+    display: grid;
+}
+
+.full-np-w .full-np-middle .user-actions a:hover,
+.full-np-w .full-np-middle .user-actions a:focus {
+    text-decoration: none;
+}
+
+.full-np-w .full-np-middle .user-actions a span {
+    color: #495057;
+    text-transform: uppercase;
+    font-size: .9rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding-top: 10px;
+}
+
+.full-np-middle .os-tabs-w {
+    justify-content: flex-end;
+}
+
+.full-np-middle .os-tabs-w .nav-tabs {
+    justify-content: flex-end;
+}
+
+.full-np-w .np-content-w {
+    height: initial;
+    overflow-y: auto;
+}
+
+.btn-green {
+    background-color: #49c37f;
+    border: 1px solid #49c37f;
+    color: #fff;
+}
+
+.form-group label {
+    font-size: 1.2rem;
+}
+
+.btn, .form-control {
+    min-height: 50px;
+    border: none;
+    display: initial;
+}
+
+.full-np-w .full-np-left .user-list .user-w:hover {
+    background-color: transparent;
+}
+
+.full-np-w .full-np-left .user-list .user-w:hover .user-date,
+.full-np-w .full-np-left .user-list .user-w.active .user-date {
+    background-color: #fff;
+    color: #666;
+}
+
+.full-np-w .full-np-left .user-list .user-w:hover .last-message {
+    color: rgba(0,0,0,0.4) 
+}
+
+.full-np-w .full-np-left .user-list .user-w .user-date {
+    background-color: inherit;
+    color: #666;
+}
+
+.full-np-w .full-np-left .user-list .user-w:hover .user-date {
+    background-color: #fff;
+}
+
+.full-np-w .full-np-left .user-list .user-w:hover .user-name {
+    color: #000;
+}

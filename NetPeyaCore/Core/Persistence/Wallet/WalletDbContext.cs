@@ -12,13 +12,15 @@ namespace Core.Persistence.Wallet
         {
         }
 
+        public DbSet<Country> Countries { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().Property(x => x.UserID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Country>().Property(x => x.ID).ValueGeneratedOnAdd();
             modelBuilder.ApplyAllConfigurations();
         }
     }

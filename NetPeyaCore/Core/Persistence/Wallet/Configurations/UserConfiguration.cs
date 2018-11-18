@@ -11,14 +11,14 @@ namespace Core.Persistence.Wallet.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(e => e.UserID)
-                .HasColumnName("UserID")
+            builder.Property(e => e.ID)
+                .HasColumnName("ID")
                 .ValueGeneratedOnAdd();
 
             builder.Property(e => e.FirstName).HasMaxLength(60);
             builder.Property(e => e.LastName).HasMaxLength(60);
             builder.Property(e => e.Email).HasMaxLength(60);
-            builder.Property(e => e.CurrencyID).HasMaxLength(2);
+            builder.Property(e => e.DefaultCurrency).HasMaxLength(2);
             builder.Property(e => e.CountryID).HasMaxLength(3);
         }
     }

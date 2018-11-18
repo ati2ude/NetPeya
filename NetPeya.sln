@@ -5,19 +5,21 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetPeyaCore", "NetPeyaCore", "{43664BEA-1D0A-4215-9882-7825FCCC2544}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "NetPeyaCore\API\API.csproj", "{D1A4612B-4D01-4350-A3AC-15448B701B43}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "NetPeyaCore\Core\Core.csproj", "{6A05AACC-5478-43F1-9638-D67CD0677F11}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dashboards", "Dashboards", "{4C2F287D-D248-4929-8AFE-DED26FAE483C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Dashboard", "Dashboards\Wallet.Dashboard\Wallet.Dashboard.csproj", "{926C337B-4847-417C-87B4-4ADC7CBDBF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wallet.Dashboard", "Dashboards\Wallet.Dashboard\Wallet.Dashboard.csproj", "{926C337B-4847-417C-87B4-4ADC7CBDBF6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merchant.Dashboard", "Dashboards\Merchant.Dashboard\Merchant.Dashboard.csproj", "{3532F510-67F3-455E-9FD4-E1461709F1CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Merchant.Dashboard", "Dashboards\Merchant.Dashboard\Merchant.Dashboard.csproj", "{3532F510-67F3-455E-9FD4-E1461709F1CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlPanel.Dashboard", "Dashboards\ControlPanel.Dashboard\ControlPanel.Dashboard.csproj", "{6675FC7D-005C-4FCD-9428-BE4B58AC80E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlPanel.Dashboard", "Dashboards\ControlPanel.Dashboard\ControlPanel.Dashboard.csproj", "{6675FC7D-005C-4FCD-9428-BE4B58AC80E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{1DD21F54-A465-4B9B-8D7E-7A2619E90398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website", "Website\Website.csproj", "{1DD21F54-A465-4B9B-8D7E-7A2619E90398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetPeyaAPI", "NetPeyaAPI", "{16BCC216-B79D-4857-A177-EAA210223C6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "NetPeyaAPI\WalletAPI\API.csproj", "{40D155EB-DED3-41FB-B115-700B1DD0B69A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D1A4612B-4D01-4350-A3AC-15448B701B43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1A4612B-4D01-4350-A3AC-15448B701B43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1A4612B-4D01-4350-A3AC-15448B701B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1A4612B-4D01-4350-A3AC-15448B701B43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A05AACC-5478-43F1-9638-D67CD0677F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A05AACC-5478-43F1-9638-D67CD0677F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A05AACC-5478-43F1-9638-D67CD0677F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,16 +47,20 @@ Global
 		{1DD21F54-A465-4B9B-8D7E-7A2619E90398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DD21F54-A465-4B9B-8D7E-7A2619E90398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DD21F54-A465-4B9B-8D7E-7A2619E90398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D155EB-DED3-41FB-B115-700B1DD0B69A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D155EB-DED3-41FB-B115-700B1DD0B69A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D155EB-DED3-41FB-B115-700B1DD0B69A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D155EB-DED3-41FB-B115-700B1DD0B69A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D1A4612B-4D01-4350-A3AC-15448B701B43} = {43664BEA-1D0A-4215-9882-7825FCCC2544}
 		{6A05AACC-5478-43F1-9638-D67CD0677F11} = {43664BEA-1D0A-4215-9882-7825FCCC2544}
 		{926C337B-4847-417C-87B4-4ADC7CBDBF6E} = {4C2F287D-D248-4929-8AFE-DED26FAE483C}
 		{3532F510-67F3-455E-9FD4-E1461709F1CD} = {4C2F287D-D248-4929-8AFE-DED26FAE483C}
 		{6675FC7D-005C-4FCD-9428-BE4B58AC80E9} = {4C2F287D-D248-4929-8AFE-DED26FAE483C}
+		{40D155EB-DED3-41FB-B115-700B1DD0B69A} = {16BCC216-B79D-4857-A177-EAA210223C6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2BA7DBA5-A4D4-401F-82F1-E9482A06C56C}

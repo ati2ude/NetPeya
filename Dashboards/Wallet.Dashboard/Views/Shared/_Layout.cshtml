@@ -1,16 +1,52 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Wallet.Dashboard</title>
     <base href="~/" />
-
+    <link href="//fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.css" rel="stylesheet" type="text/css">
+    <link href="~/public_assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/dropzone/dist/dropzone.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="~/public_assets/vendors/slick-carousel/slick/slick.css" rel="stylesheet">
+    <link href="~/public_assets/css/slick-carousel/slick/slick.css" rel="stylesheet">
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
 </head>
-<body>
+<body class="menu-position-side menu-side-left">
     @RenderBody()
 
+    <script src="~/public_assets/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/public_assets/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/public_assets/vendors/moment/moment.js"></script>
+    <script src="~/public_assets/vendors/chart.js/dist/Chart.min.js"></script>
+    <script src="~/public_assets/vendors/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/public_assets/vendors/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="~/public_assets/vendors/ckeditor/ckeditor.js"></script>
+    <script src="~/public_assets/vendors/bootstrap-validator/dist/validator.min.js"></script>
+    <script src="~/public_assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/public_assets/vendors/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/public_assets/vendors/dropzone/dist/dropzone.js"></script>
+    <script src="~/public_assets/vendors/editable-table/mindmup-editabletable.js"></script>
+    <script src="~/public_assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/public_assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/public_assets/vendors/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="~/public_assets/vendors/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/public_assets/vendors/tether/dist/js/tether.min.js"></script>
+    <script src="~/public_assets/vendors/slick-carousel/slick/slick.min.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/util.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/alert.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/button.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/carousel.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/collapse.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/dropdown.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/modal.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/tab.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/tooltip.js"></script>
+    <script src="~/public_assets/vendors/bootstrap/js/dist/popover.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

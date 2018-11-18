@@ -27,11 +27,11 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
         {
             var entity = new User
             {
-                UserID = request.UserID,
+                ID = request.ID,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
-                CurrencyID = request.CurrencyID,
+                DefaultCurrency = request.DefaultCurrency,
                 CountryID = request.CountryID
             };
 
