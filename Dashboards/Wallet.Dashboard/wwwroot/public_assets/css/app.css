@@ -13,11 +13,16 @@ body:before {
 
 .full-np-w .full-np-middle {
     min-height: 100vh;
+    background-color: #f6f7f8;
 }
 
 .full-np-w .full-np-left {
-
+    background-color: #ffffff;
 }
+.full-np-w .full-np-i {
+    background-color: #f6f7f8;
+}
+
 
 .full-np-w .full-np-middle .np-head {
     padding: 30px 20px;
@@ -83,6 +88,7 @@ body:before {
     min-height: 50px;
     border: none;
     display: initial;
+    background-color: #f6f7f8;
 }
 
 .full-np-w .full-np-left .user-list .user-w:hover {
