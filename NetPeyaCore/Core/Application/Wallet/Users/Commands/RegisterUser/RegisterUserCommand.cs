@@ -2,11 +2,11 @@
 using MediatR;
 using System;
 
-namespace Core.Application.Wallet.Users.Commands.CreateUser
+namespace Core.Application.Wallet.Users.Commands.RegisterUser
 {
-    public class CreateUserCommand : IRequest
+    public class RegisterUserCommand : IRequest
     {
-        public int ID { get; set; }
+        // For User Entity
         public int CountryID { get; set; } // TO_DO use a country entity
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -15,9 +15,9 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
         public string DateOfBirth { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+
+        // For WalletAccount Entity
+        public int CurrencyID { get; set; }
     }
 }
 

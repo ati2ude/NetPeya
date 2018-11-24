@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Application.Wallet.Users.Commands.CreateUser
+namespace Core.Application.Wallet.Users.Commands.RegisterUser
 {
-    public class CreateWalletCommandValidator : AbstractValidator<CreateUserCommand>
+    public class RegisterCommandValidator : AbstractValidator<RegisterUserCommand>
     {
-        public CreateWalletCommandValidator()
+        public RegisterCommandValidator()
         {
             RuleFor(x => x.FirstName).MaximumLength(60);
             RuleFor(x => x.LastName).MaximumLength(60);

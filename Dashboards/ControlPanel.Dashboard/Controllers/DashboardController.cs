@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControlPanel.Dashboard.Controllers
 {
-    public class HomeController : Controller
+    public class DashboardController : Controller
     {
         public IActionResult Index()
         {

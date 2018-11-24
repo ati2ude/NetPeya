@@ -6,12 +6,18 @@ namespace Core.Domain.Wallet.Entities
 {
     public class User
     {
-        public int? ID { get; set; }
-        public int DefaultCurrency { get; set; } // TO-DO use a currency entity
-        public int CountryID { get; set; } // TO_DO use a country entity
+        public int ID { get; set; }
+        public int CountryID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Phone { get; set; }
+        public string DateOfBirth { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
     }
 }

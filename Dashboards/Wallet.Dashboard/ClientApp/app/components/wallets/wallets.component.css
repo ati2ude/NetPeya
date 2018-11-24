@@ -90,3 +90,7 @@
 .main-wallet-holder .inner .transactions {
     padding: 50px 0;
 }
+
+.full-np-w .full-np-left .element-search input {
+    background-color: inherit;
+}

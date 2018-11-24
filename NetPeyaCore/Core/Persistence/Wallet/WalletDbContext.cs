@@ -12,15 +12,34 @@ namespace Core.Persistence.Wallet
         {
         }
 
+        public DbSet<Currency> Currencies { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<WalletAccountCategory> WalletAccountCategories { get; set; }
+        public DbSet<WalletAccount> WalletAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            // User
             modelBuilder.Entity<User>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
+            // WalletAccountCategory
+            modelBuilder.Entity<WalletAccountCategory>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<WalletAccountCategory>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<WalletAccountCategory>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
+            // WalletAccount
+            modelBuilder.Entity<WalletAccount>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<WalletAccount>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<WalletAccount>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
+            // Country
             modelBuilder.Entity<Country>().Property(x => x.ID).ValueGeneratedOnAdd();
+
             modelBuilder.ApplyAllConfigurations();
         }
     }

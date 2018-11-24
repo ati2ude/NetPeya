@@ -18,7 +18,6 @@ namespace Core.Persistence.Wallet.Configurations
             builder.Property(e => e.FirstName).HasMaxLength(60);
             builder.Property(e => e.LastName).HasMaxLength(60);
             builder.Property(e => e.Email).HasMaxLength(60);
-            builder.Property(e => e.DefaultCurrency).HasMaxLength(2);
             builder.Property(e => e.CountryID).HasMaxLength(3);
         }
     }

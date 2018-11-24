@@ -48,7 +48,7 @@ namespace WalletAPI
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommandValidator>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateWalletCommandValidator>());
 
             // Customise default API behavour
             services.Configure<ApiBehaviorOptions>(options =>

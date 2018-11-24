@@ -27,11 +27,17 @@ body.menu-position-side .content-w,
     min-height: 100vh;
     background-color: #d2dbdc;
     box-shadow: none;
+    padding: 0 15px;
 }
 
 .menu-w.menu-layout-mini ul.main-menu {
     padding: 0;
 }
+.menu-w ul.main-menu > li > a {
+    display: grid;
+    text-align: center;
+}
+
 
 .menu-w ul.main-menu > li .icon-w {
     color: #808080;
@@ -46,4 +52,15 @@ body.menu-position-side .content-w,
     color: #49c37f;
     -webkit-transform: none;
      transform: none; 
+}
+
+.menu-w ul.main-menu > li > a:hover span {
+    -webkit-transform: none;
+    transform: none;
+}
+
+.menu-w.menu-layout-mini ul.main-menu > li span {
+    display: block;
+    padding: 0 0 15px;
+    letter-spacing: 2px;
 }

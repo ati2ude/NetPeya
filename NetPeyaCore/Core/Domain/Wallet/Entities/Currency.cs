@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class Country
+    public class Currency
     {
         public int ID { get; set; }
-        public int DefaultCurrency { get; set; }
         public string Name { get; set; }
+        public string Symbol { get; set; }
         public string Code { get; set; }
+        public bool AddOnRegistration { get; set; }
     }
 }

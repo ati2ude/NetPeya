@@ -11,6 +11,10 @@ body:before {
     border-radius: 0;
 }
 
+.full-np-w .full-np-left .element-search input {
+    background-color: #f6f7f8;
+}
+
 .full-np-w .full-np-middle {
     min-height: 100vh;
     background-color: #f6f7f8;
@@ -88,6 +92,9 @@ body:before {
     min-height: 50px;
     border: none;
     display: initial;
+}
+
+.form-control {
     background-color: #f6f7f8;
 }
 

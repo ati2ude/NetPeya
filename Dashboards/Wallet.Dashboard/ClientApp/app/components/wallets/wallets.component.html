@@ -2,13 +2,13 @@
     <div class="full-np-left">
         <div class="os-tabs-w">
             <ul class="nav nav-tabs upper">
-                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab_overview"><i class="os-icon os-icon-wallet-loaded"></i><span>Wallets</span></a></li>
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#new_wallet"><i class="os-icon os-icon-plus-circle"></i><span>New wallet</span></a></li>
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab_overview"><i class="os-icon os-icon-wallet-loaded"></i><span>Wallets</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#new_wallet"><i class="os-icon os-icon-plus-circle"></i><span>New wallet</span></a></li>
             </ul>
             <div class="tab-content">
-                <div id="tab_overview" class="tab-pane">
+                <div id="tab_overview" class="tab-pane active">
                     <div class="np-search">
-                        <div class="element-search"><input placeholder="Search your wallets..." type="text"></div>
+                        <div class="element-search"><input class="form-control" placeholder="Search your wallets..." type="text"></div>
                     </div>
                     <div class="user-list">
                         <div class="user-w">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="new_wallet" class="tab-pane active">
+                <div id="new_wallet" class="tab-pane">
                     <div class="new-wallet p-4">
                         <h4 class="py-3">New Wallet</h4>
                         <form>
@@ -81,13 +81,16 @@
                                     </div>
                                     <h2 class="wallet-balance">R1,200,500.50</h2>
                                     <div class="wallet-info d-flex align-items-center justify-content-between">
-                                        <span><strong>Wallet #:</strong> 534534908893455</span>
+                                        <span><strong>Wallet ID:</strong> 534534908893455</span>
                                         <span><strong>Category:</strong> e-Commerce</span>
                                     </div>
                                     <i class="back-wallet-icon os-icon os-icon-shopping-cart"></i>
                                 </div>
                                 <div class="transactions">
-                                    <h2 class="title">Transactions</h2>
+                                    <div class="transactions-header d-flex justify-content-between align-items-baseline">
+                                        <h2 class="title">Transactions</h2>
+                                        <h2><i class="os-icon os-icon-toggle-right"></i></h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>

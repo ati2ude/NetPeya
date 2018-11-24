@@ -38,7 +38,7 @@ namespace ControlPanel.Dashboard
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Dashboard/Error");
             }
 
             app.UseStaticFiles();
@@ -47,11 +47,11 @@ namespace ControlPanel.Dashboard
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Dashboard}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults: new { controller = "Dashboard", action = "Index" });
             });
         }
     }
