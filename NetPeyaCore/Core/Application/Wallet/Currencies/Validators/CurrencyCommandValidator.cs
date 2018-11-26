@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 {
-    public class CurrencyCommandValidator : AbstractValidator<CurrencyCommandRequestModel>
+    public class CurrencyCommandValidator : AbstractValidator<CreateCurrencyCommand>
     {
         public CurrencyCommandValidator()
         {

@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using Core.Domain.Wallet.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Core.Application.Wallet.Currencies.Commands.Models
 {
-    public class CurrencyCommandRequestModel : IRequest
+    public class BaseCurrencyCommand : IRequest<Currency>
     {
         public int ID { get; set; }
         public string Name { get; set; }

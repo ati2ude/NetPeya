@@ -1,8 +1,9 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class WalletAccount
+    public class WalletAccount : BaseEntity
     {
         public int ID { get; set; }
         public int UserID { get; set; }

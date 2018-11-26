@@ -10,10 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Core.Application.Wallet.Currencies.Commands.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 {
-    public class CreateCurrencyCommandHandler : IRequestHandler<CurrencyCommandRequestModel, Unit>
+    public class CreateCurrencyCommandHandler : IRequestHandler<CreateCurrencyCommand, Currency>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -26,7 +27,7 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CurrencyCommandRequestModel request, CancellationToken cancellationToken)
+        public async Task<Currency> Handle(CreateCurrencyCommand request, CancellationToken cancellationToken)
         {
             var entity = _context.Currencies.SingleOrDefault(b => b.Code == request.Code);
 
@@ -47,7 +48,9 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            currencyEntity.entityState = EntityState.Added;
+
+            return currencyEntity;
         }
     }
 }

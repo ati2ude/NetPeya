@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
         public int ID { get; set; }
         public int CountryID { get; set; }
@@ -18,6 +19,5 @@ namespace Core.Domain.Wallet.Entities
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
 }

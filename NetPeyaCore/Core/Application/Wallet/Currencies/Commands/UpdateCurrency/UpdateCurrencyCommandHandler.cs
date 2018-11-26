@@ -4,13 +4,14 @@ using Core.Application.Wallet.Currencies.Commands.Models;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
 {
-    public class UpdateCurrencyCommandHandler : IRequestHandler<CurrencyCommandRequestModel, Unit>
+    public class UpdateCurrencyCommandHandler : IRequestHandler<UpdateCurrencyCommand, Currency>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -23,7 +24,7 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CurrencyCommandRequestModel request, CancellationToken cancellationToken)
+        public async Task<Currency> Handle(UpdateCurrencyCommand request, CancellationToken cancellationToken)
         {
             var entity = _context.Currencies.SingleOrDefault(b => b.ID == request.ID);
 
@@ -48,7 +49,9 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            return entity;
         }
     }
 }
