@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using Core.Application.Wallet.Currencies.Commands.Models;
 
 namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 {
-    public class CreateCurrencyCommandHandler : IRequestHandler<CreateCurrencyCommand, Unit>
+    public class CreateCurrencyCommandHandler : IRequestHandler<CurrencyCommandRequestModel, Unit>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -25,20 +26,9 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CreateCurrencyCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CurrencyCommandRequestModel request, CancellationToken cancellationToken)
         {
-            var entity = (
-                from c in _context.Currencies
-                where c.Code == request.Code
-                select new
-                    {
-                        c.ID,
-                        c.Name,
-                        c.Symbol,
-                        c.Code
-                    }
-            ).FirstOrDefault();
-                
+            var entity = _context.Currencies.SingleOrDefault(b => b.Code == request.Code);
 
             if (entity != null)
             {
@@ -50,7 +40,7 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
                 Name = request.Name,
                 Symbol = request.Symbol,
                 Code = request.Code,
-                AddOnRegistration =request.AddOnRegistration
+                AddOnRegistration = request.AddOnRegistration
             };
 
             _context.Currencies.Add(currencyEntity);

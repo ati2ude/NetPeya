@@ -1,13 +1,14 @@
-﻿using FluentValidation;
+﻿using Core.Application.Wallet.Currencies.Commands.Models;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 {
-    public class CreateCurrencyCommandValidator : AbstractValidator<CreateCurrencyCommand>
+    public class CurrencyCommandValidator : AbstractValidator<CurrencyCommandRequestModel>
     {
-        public CreateCurrencyCommandValidator()
+        public CurrencyCommandValidator()
         {
             RuleFor(x => x.Name).MaximumLength(60);
             RuleFor(x => x.Code).MaximumLength(3);

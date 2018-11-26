@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
+namespace Core.Application.Wallet.Currencies.Commands.Models
 {
-    public class CreateCurrencyCommand : IRequest
+    public class CurrencyCommandRequestModel : IRequest
     {
         public int ID { get; set; }
         public string Name { get; set; }

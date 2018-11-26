@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Application.Wallet.Currencies.Commands.CreateCurrency;
+using Core.Application.Wallet.Currencies.Commands.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,23 +20,27 @@ namespace API.Controllers.Wallet
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
+        // GET api/currencies/get/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
+        // POST api/currencies/create
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] CreateCurrencyCommand command)
+        public async Task<IActionResult> Create([FromForm] CurrencyCommandRequestModel command)
         {
             return Ok(await Mediator.Send(command));
         }
 
-        // PUT api/<controller>/5
+        // PUT api/currencies/update/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Update(int id, [FromForm] CurrencyCommandRequestModel command)
         {
+            command.ID = id;
+
+            return Ok(await Mediator.Send(command));
         }
 
         // DELETE api/<controller>/5
