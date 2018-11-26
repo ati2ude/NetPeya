@@ -12,13 +12,13 @@ namespace API.Controllers.Wallet
     {
         // POST api/walletaccounts
         [HttpPost]
-        public async Task<IActionResult> create([FromForm]CreateWalletAccountCommand command)
+        public async Task<IActionResult> Create([FromForm]CreateWalletAccountCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetWalletAccount(int id)
         {
             return Ok(await Mediator.Send(new WalletAccountDetailQuery { ID = id }));
         }

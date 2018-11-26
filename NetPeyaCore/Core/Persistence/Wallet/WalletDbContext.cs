@@ -22,6 +22,11 @@ namespace Core.Persistence.Wallet
         {
             base.OnModelCreating(modelBuilder);
 
+            // WalletAccount
+            modelBuilder.Entity<Currency>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Currency>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Currency>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
             // User
             modelBuilder.Entity<User>().Property(x => x.ID).ValueGeneratedOnAdd();
             modelBuilder.Entity<User>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();

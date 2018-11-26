@@ -48,9 +48,8 @@ namespace Core.Application.Wallet.WalletAccounts.Queries.GetUserWalletAccounts
                     wa.WalletAccountCode,
                     wa.Balance,
                     wa.IsDefault,
-                    CurrencyCode = c.Code,
-                    CurrencySymbol = c.Symbol,
-                    WalletAccountCategory = wac.Name
+                    Currency = c,
+                    Category = wac
 
                 }).ToList();
 
@@ -64,9 +63,8 @@ namespace Core.Application.Wallet.WalletAccounts.Queries.GetUserWalletAccounts
                     {
                         ID = walletDetail.ID,
                         UserID = walletDetail.UserID,
-                        CurrencyCode = walletDetail.CurrencyCode,
-                        CurrencySymbol = walletDetail.CurrencySymbol,
-                        WalletAccountCategory = walletDetail.WalletAccountCategory,
+                        Currency = walletDetail.Currency,
+                        WalletAccountCategory = walletDetail.Category,
                         WalletAccountCode = walletDetail.WalletAccountCode,
                         Name = walletDetail.Name,
                         Balance = walletDetail.Balance,

@@ -48,9 +48,8 @@ namespace Core.Application.Wallet.WalletAccounts.Queries
                     wa.WalletAccountCode,
                     wa.Balance,
                     wa.IsDefault,
-                    CurrencyCode = c.Code,
-                    CurrencySymbol = c.Symbol,
-                    WalletAccountCategory = wac.Name
+                    Currency = c,
+                    WalletAccountCategory = wac
 
                 }).First();
 
@@ -58,8 +57,7 @@ namespace Core.Application.Wallet.WalletAccounts.Queries
             {
                 ID = queryEntry.ID,
                 UserID = queryEntry.UserID,
-                CurrencyCode = queryEntry.CurrencyCode,
-                CurrencySymbol = queryEntry.CurrencySymbol,
+                Currency = queryEntry.Currency,
                 WalletAccountCategory = queryEntry.WalletAccountCategory,
                 WalletAccountCode = queryEntry.WalletAccountCode,
                 Name = queryEntry.Name,

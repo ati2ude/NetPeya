@@ -28,7 +28,7 @@ namespace Core.Application.Wallet.Countries.Commands
             var entity = new Country
             {
                 ID = request.ID,
-                DefaultCurrency = request.DefaultCurrency,
+                DefaultCurrencyID = request.DefaultCurrencyID,
                 Name = request.Name,
                 Code = request.Code
             };

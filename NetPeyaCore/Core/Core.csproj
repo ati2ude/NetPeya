@@ -15,9 +15,9 @@
   <ItemGroup>
     <Folder Include="Application\Wallet\Countries\Commands\DeleteCountry\" />
     <Folder Include="Application\Wallet\Countries\Queries\" />
+    <Folder Include="Application\Wallet\Currencies\Queries\" />
     <Folder Include="Application\Wallet\Users\Commands\DeleteUser\" />
     <Folder Include="Application\Wallet\Users\Commands\UpdateUser\" />
-    <Folder Include="Application\Wallet\Users\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

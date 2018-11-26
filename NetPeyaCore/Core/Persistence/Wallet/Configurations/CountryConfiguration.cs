@@ -14,10 +14,9 @@ namespace Core.Persistence.Wallet.Configurations
             builder.Property(e => e.ID)
                 .HasColumnName("ID")
                 .ValueGeneratedOnAdd();
-
-            builder.Property(e => e.DefaultCurrency).HasMaxLength(60);
+            
             builder.Property(e => e.Name).HasMaxLength(60);
-            builder.Property(e => e.Code).HasMaxLength(60);
+            builder.Property(e => e.Code).HasMaxLength(4);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core.Application.Wallet.Users.Commands.RegisterUser;
+using Core.Application.Wallet.Users.Queries.GetUserDetails;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,10 +16,10 @@ namespace API.Controllers.Wallet
             return Ok(await Mediator.Send(command));
         }
 
-        //[HttpGet]
-        //public IEnumerable<User> Get()
-        //{
-        //    return new User[] { new User { UserId = new Guid().ToString(), FirstName = "Emmanuel", LastName = "mahaso", Country = 2, DefaultCurrency = 2, Email = "ati2ude1@gmail.com" } };
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserDetails(int id)
+        {
+            return Ok(await Mediator.Send(new GetUserDetailsQuery { UserID = id }));
+        }
     }
 }
