@@ -41,6 +41,15 @@ namespace WalletAPI
 
             services.AddMediatR();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             // Add DbContext using SQL Server Provider
             services.AddDbContext<WalletDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WalletDatabase")));
@@ -71,6 +80,7 @@ namespace WalletAPI
                 //app.UseHsts();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }
