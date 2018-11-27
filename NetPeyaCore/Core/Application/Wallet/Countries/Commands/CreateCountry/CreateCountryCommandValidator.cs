@@ -13,7 +13,6 @@ namespace Core.Application.Wallet.Countries.Commands
         {
             RuleFor(x => x.Name).MaximumLength(60);
             RuleFor(x => x.Code).MaximumLength(5);
-
         }
     }
 }
