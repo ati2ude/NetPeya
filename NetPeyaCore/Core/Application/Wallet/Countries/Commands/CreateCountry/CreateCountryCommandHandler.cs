@@ -2,6 +2,7 @@
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.Countries.Commands
 {
-    public class CreateCoutrnyCommandHandler : IRequestHandler<CreateCountryCommand, Unit>
+    public class CreateCoutrnyCommandHandler : IRequestHandler<CreateCountryCommand, Country>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -23,21 +24,24 @@ namespace Core.Application.Wallet.Countries.Commands
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
+        public async Task<Country> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
             var entity = new Country
             {
                 ID = request.ID,
                 DefaultCurrencyID = request.DefaultCurrencyID,
                 Name = request.Name,
-                Code = request.Code
+                Code = request.Code,
+                PhoneCode = request.PhoneCode
             };
 
             _context.Countries.Add(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            entity.entityState = EntityState.Added;
+
+            return entity;
         }
     }
 }

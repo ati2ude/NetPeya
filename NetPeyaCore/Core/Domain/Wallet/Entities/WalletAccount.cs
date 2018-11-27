@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Core.Persistence.Wallet;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities

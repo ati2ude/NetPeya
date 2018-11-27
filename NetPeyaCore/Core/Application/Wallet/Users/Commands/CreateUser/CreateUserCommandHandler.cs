@@ -2,6 +2,7 @@
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.Users.Commands.CreateUser
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Unit>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -23,7 +24,7 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var entity = new User
             {
@@ -31,6 +32,7 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
+                Password = request.Password,
                 Phone = request.Phone,
                 DateOfBirth = request.DateOfBirth,
                 AddressLine1 = request.AddressLine1,
@@ -42,7 +44,9 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            entity.entityState = EntityState.Added;
+
+            return entity;
         }
     }
 }
