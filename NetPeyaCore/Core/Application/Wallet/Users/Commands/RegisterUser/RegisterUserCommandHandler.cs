@@ -1,9 +1,11 @@
-﻿using Core.Application.Interfaces;
+﻿using Core.Application.Exceptions;
+using Core.Application.Interfaces;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +27,13 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
 
         public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
+            var entity = _context.Users.SingleOrDefault(b => b.Email == request.Email);
+
+            if (entity != null)
+            {
+                throw new DuplicateEntriesException(nameof(User), request.Email);
+            }
+
             // Create User Entity
             User user_entity = new User
             {
@@ -33,6 +42,7 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
                 LastName = request.LastName,
                 Email = request.Email,
                 Phone = request.Phone,
+                Password = request.Password,
                 DateOfBirth = request.DateOfBirth,
                 AddressLine1 = request.AddressLine1,
                 AddressLine2 = request.AddressLine2,
@@ -46,13 +56,15 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
             _context.Entry(user_entity).GetDatabaseValues();
 
             // Create WalletAccount Entity
+            var defaultWalletCategory = new WalletAccountCategory().GetWalletAccountCategory(_context);
+
             WalletAccount wallet_account_entity = new WalletAccount
             {
                 UserID = user_entity.ID,
                 CurrencyID = request.CurrencyID,
-                WalletAccountCategoryID = 1, // WalletAccount.GetDefault().ID
+                WalletAccountCategoryID = defaultWalletCategory.ID,
                 WalletAccountCode = WalletAccount.generateWalletAccountCode(user_entity.ID),
-                Name = "E-Commerce", // WalletAccount.GetDefault.Name
+                Name = defaultWalletCategory.Name,
                 Balance = 0,
                 IsDefault = true
             };

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Wallet
 {
-    [Route("api/[controller]")]
     public class CountriesController : WalletBaseController
     {
         // POST api/customers

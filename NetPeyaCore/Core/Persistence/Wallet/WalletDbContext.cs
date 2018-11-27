@@ -17,6 +17,7 @@ namespace Core.Persistence.Wallet
         public DbSet<User> Users { get; set; }
         public DbSet<WalletAccountCategory> WalletAccountCategories { get; set; }
         public DbSet<WalletAccount> WalletAccounts { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,8 +43,15 @@ namespace Core.Persistence.Wallet
             modelBuilder.Entity<WalletAccount>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
             modelBuilder.Entity<WalletAccount>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
 
+            // BankAccount
+            modelBuilder.Entity<BankAccount>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<BankAccount>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<BankAccount>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
             // Country
             modelBuilder.Entity<Country>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Country>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Country>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
 
             modelBuilder.ApplyAllConfigurations();
         }
