@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -32,7 +33,8 @@ namespace Core.Application.Wallet.CardTypes.Commands.CreateCardType
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(CardType), request.Name);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             var cardTypeEntity = new CardType
@@ -42,7 +44,14 @@ namespace Core.Application.Wallet.CardTypes.Commands.CreateCardType
 
             _context.CardTypes.Add(cardTypeEntity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                cardTypeEntity.statusCode = SharedStatusCodes.Created;
+            }
+            else
+            {
+                cardTypeEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return cardTypeEntity;
         }

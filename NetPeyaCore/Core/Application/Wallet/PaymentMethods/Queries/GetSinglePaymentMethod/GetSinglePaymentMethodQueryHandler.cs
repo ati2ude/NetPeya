@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -26,8 +27,10 @@ namespace Core.Application.Wallet.PaymentMethods.Queries.GetSinglePaymentMethod
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Currency), request.ID);
+                return new PaymentMethod { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
+
+            entity.statusCode = SharedStatusCodes.Retrieved;
 
             return entity;
         }

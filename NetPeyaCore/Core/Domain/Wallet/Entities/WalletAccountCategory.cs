@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class WalletAccountCategory
+    public class WalletAccountCategory : BaseEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }

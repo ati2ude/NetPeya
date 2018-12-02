@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -32,7 +33,8 @@ namespace Core.Application.Wallet.Countries.Commands
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(Country), request.Name);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             var countryEntity = new Country
@@ -45,7 +47,21 @@ namespace Core.Application.Wallet.Countries.Commands
 
             _context.Countries.Add(countryEntity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            try
+            {
+                if (await _context.SaveChangesAsync(cancellationToken) > 0)
+                {
+                    countryEntity.statusCode = SharedStatusCodes.Created;
+                }
+                else
+                {
+                    countryEntity.statusCode = SharedStatusCodes.Failed;
+                }
+            }
+            catch (Exception)
+            {
+                countryEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return countryEntity;
         }

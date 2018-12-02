@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -22,19 +23,26 @@ namespace Core.Application.Wallet.CardTypes.Commands.DeleteCardType
 
         public async Task<CardType> Handle(DeleteCardTypeCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.CardTypes
+            var cardTypeEntity = await _context.CardTypes
                 .FindAsync(request.ID);
 
-            if (entity == null)
+            if (cardTypeEntity == null)
             {
-                throw new NotFoundException(nameof(CardType), request.ID);
+                return new CardType { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            _context.CardTypes.Remove(entity);
+            _context.CardTypes.Remove(cardTypeEntity);
 
-            await _context.SaveChangesAsync();
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                cardTypeEntity.statusCode = SharedStatusCodes.Deleted;
+            }
+            else
+            {
+                cardTypeEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
-            return entity;
+            return cardTypeEntity;
         }
     }
 }

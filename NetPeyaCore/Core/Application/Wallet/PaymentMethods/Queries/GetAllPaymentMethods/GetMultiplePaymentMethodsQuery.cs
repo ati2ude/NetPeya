@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.PaymentMethods.Queries.GetAllPaymentMethods
 {
-    public class GetAllPaymentMethodsQuery : IRequest<List<PaymentMethod>>
+    public class GetMultiplePaymentMethodsQuery : IRequest<List<PaymentMethod>>
     {
     }
 }

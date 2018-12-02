@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -27,12 +28,19 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.DeletePaymentMethod
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(PaymentMethod), request.ID);
+                return new PaymentMethod { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
             _context.PaymentMethods.Remove(entity);
 
-            await _context.SaveChangesAsync();
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                entity.statusCode = SharedStatusCodes.Deleted;
+            }
+            else
+            {
+                entity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return entity;
         }

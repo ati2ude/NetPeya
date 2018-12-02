@@ -46,7 +46,7 @@ namespace Core.Application.Wallet.BankAccounts.Commands.UpdateBankAccount
             if (!string.IsNullOrEmpty(request.AddressLine2)) entity.AddressLine2 = request.AddressLine2;
             if (!string.IsNullOrEmpty(request.City)) entity.City = request.City;
             if (!string.IsNullOrEmpty(request.Country)) entity.Country = request.Country;
-
+            
             if (request.IsDefault)
             {
                 foreach (var crr in _context.BankAccounts.Where(x => x.UserID == request.UserID).ToList())

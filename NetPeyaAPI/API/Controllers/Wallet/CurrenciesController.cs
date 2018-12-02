@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.APIResponse.Wallet;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.Currencies.Commands.DeleteCurrency;
 using Core.Application.Wallet.Currencies.Commands.Models;
 using Core.Application.Wallet.Currencies.Queries.GetAllCurrenciesQuery;
@@ -49,7 +50,16 @@ namespace API.Controllers.Wallet.CurrenciesController
             if (ModelState.IsValid)
             {
                 List<Currency> taskReturn = await Mediator.Send(new GetMultipleCurrenciesQuery());
-                return Ok(new CurrenciesResponse(nameof(Currency), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
+
+                if (taskReturn.Count > 0)
+                {
+                    return Ok(new CurrenciesResponse(nameof(Currency), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
+                }
+                else
+                {
+                    Currency currency = new Currency { ID = 0, statusCode = SharedStatusCodes.NotFound };
+                    return Ok(new CurrenciesResponse(nameof(Currency), currency, currency.statusCode, _baseLocalizer, _localizer));
+                }
             }
             else
             {

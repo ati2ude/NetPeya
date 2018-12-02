@@ -6,14 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.PaymentMethods.Queries.GetSinglePaymentMethod
 {
-    public class GetSinglePaymentMethodQuery : IRequest<PaymentMethod>
+    public class GetSinglePaymentMethodQuery : PaymentMethod, IRequest<PaymentMethod>
     {
-        int _Id;
-
-        public int ID
-        {
-            get { return _Id; }
-            set { _Id = Int32.Parse(value.ToString()); }
-        }
     }
 }

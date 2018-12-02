@@ -11,14 +11,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Core.Application.Wallet.CardTypes.Commands.UpdateCardType
+namespace Core.Application.Wallet.Countries.Commands.UpdateUser
 {
-    public class UpdateCardTypeCommandHandler : IRequestHandler<UpdateCardTypeCommand, CardType>
+    public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, Country>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
 
-        public UpdateCardTypeCommandHandler(
+        public UpdateCountryCommandHandler(
             WalletDbContext context,
             INotificationService notificationService)
         {
@@ -26,16 +26,19 @@ namespace Core.Application.Wallet.CardTypes.Commands.UpdateCardType
             _notificationService = notificationService;
         }
 
-        public async Task<CardType> Handle(UpdateCardTypeCommand request, CancellationToken cancellationToken)
+        public async Task<Country> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
-            var entity = _context.CardTypes.SingleOrDefault(b => b.ID == request.ID);
+            var entity = _context.Countries.SingleOrDefault(b => b.ID == request.ID);
 
             if (entity == null)
             {
-                return new CardType { ID = 0, statusCode = SharedStatusCodes.NotFound };
+                return new Country { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            if (!string.IsNullOrEmpty(request.Name)) entity.Name = request.Name;
+            if (request.DefaultCurrencyID != null) entity.DefaultCurrencyID = request.DefaultCurrencyID;
+            if (request.Name != null) entity.Name = request.Name;
+            if (request.Code != null) entity.Code = request.Code;
+            if (request.PhoneCode != null) entity.PhoneCode = request.PhoneCode;
 
             if (!_context.Entry(entity).Context.ChangeTracker.HasChanges())
             {

@@ -1,20 +1,16 @@
 ﻿using WalletAPI.Filters;
 using Core.Application.Infrustructure;
 using Core.Application.Interfaces;
-using Core.Application.Wallet.Users.Commands.CreateUser;
 using Core.Common;
 using Core.Infrustructure;
 using Core.Persistence.Wallet;
-using FluentValidation.AspNetCore;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Core.Application.Wallet.Countries.Commands;
 using System.Globalization;
 
 namespace WalletAPI
@@ -59,15 +55,7 @@ namespace WalletAPI
 
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
-                .AddDataAnnotationsLocalization()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateWalletCommandValidator>());
-
-            // Customise default API behavour
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+                .AddDataAnnotationsLocalization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

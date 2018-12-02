@@ -6,14 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.CardTypes.Queries.GetSingleCardType
 {
-    public class GetSingleCardTypeQuery : IRequest<CardType>
+    public class GetSingleCardTypeQuery : CardType, IRequest<CardType>
     {
-        int _id;
-
-        public int ID
-        {
-            get { return _id; }
-            set { _id = Int32.Parse(value.ToString()); }
-        }
     }
 }

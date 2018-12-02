@@ -37,7 +37,7 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
             if (!string.IsNullOrEmpty(request.Name)) currencyEntity.Name = request.Name;
             if (!string.IsNullOrEmpty(request.Code)) currencyEntity.Code = request.Code;
             if (!string.IsNullOrEmpty(request.Symbol)) currencyEntity.Symbol = request.Symbol;
-
+        
             if (request.AddOnRegistration)
             {
                 foreach (var crr in _context.Currencies.Where(x => x.AddOnRegistration == true).ToList())

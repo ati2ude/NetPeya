@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class Recipient
+    public class Recipient : BaseEntity
     {
         public int ID { get; set; }
 
@@ -29,8 +29,5 @@ namespace Core.Domain.Wallet.Entities
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [NotMapped]
-        public int statusCode { get; set; }
     }
 }

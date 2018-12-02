@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -31,7 +32,8 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.CreatePaymentMethod
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(PaymentMethod), request.Name);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             var methodEntity = new PaymentMethod
@@ -47,7 +49,14 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.CreatePaymentMethod
 
             _context.PaymentMethods.Add(methodEntity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                methodEntity.statusCode = SharedStatusCodes.Created;
+            }
+            else
+            {
+                methodEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return methodEntity;
         }

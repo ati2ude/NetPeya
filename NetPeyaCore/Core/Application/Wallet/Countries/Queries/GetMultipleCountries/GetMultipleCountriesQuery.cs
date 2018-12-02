@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.Countries.Queries.GetAllCountries
 {
-    public class GetAllCountriesQuery : IRequest<List<Country>>
+    public class GetMultipleCountriesQuery : IRequest<List<Country>>
     {
     }
 }

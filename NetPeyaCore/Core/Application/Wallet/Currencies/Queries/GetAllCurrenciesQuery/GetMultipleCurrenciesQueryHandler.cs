@@ -25,9 +25,12 @@ namespace Core.Application.Wallet.Currencies.Queries.GetAllCurrenciesQuery
         {
             await _context.SaveChangesAsync();
 
-            var currencies = _context.Currencies.ToList();
+            List<Currency> currencies = _context.Currencies.ToList();
 
-            currencies.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
+            if (currencies.Count > 0)
+            {
+                currencies.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
+            }
 
             return currencies;
         }
