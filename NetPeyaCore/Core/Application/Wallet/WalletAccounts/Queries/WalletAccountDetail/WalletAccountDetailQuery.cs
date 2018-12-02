@@ -6,14 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.WalletAccounts.Queries
 {
-    public class WalletAccountDetailQuery : IRequest<WalletAccountDetailModel>
+    public class WalletAccountDetailQuery : WalletAccountDetailModel, IRequest<WalletAccountDetailModel>
     {
-        int _id;
-
-        public int ID
-        {
-            get { return _id; }
-            set { _id = Int32.Parse(value.ToString()); }
-        }
     }
 }

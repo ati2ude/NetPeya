@@ -1,4 +1,5 @@
 ﻿using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.WalletAccounts.Commands.CreateWalletAccount
 {
-    public class CreateWalletAccountCommandHandler : IRequestHandler<CreateWalletAccountCommand, Unit>
+    public class CreateWalletAccountCommandHandler : IRequestHandler<CreateWalletAccountCommand, WalletAccount>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -20,7 +21,7 @@ namespace Core.Application.Wallet.WalletAccounts.Commands.CreateWalletAccount
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(CreateWalletAccountCommand request, CancellationToken cancellationToken)
+        public async Task<WalletAccount> Handle(CreateWalletAccountCommand request, CancellationToken cancellationToken)
         {
             var entity = new WalletAccount
             {
@@ -35,9 +36,16 @@ namespace Core.Application.Wallet.WalletAccounts.Commands.CreateWalletAccount
 
             _context.WalletAccounts.Add(entity);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                entity.statusCode = SharedStatusCodes.Created;
+            }
+            else
+            {
+                entity.statusCode = SharedStatusCodes.Failed;
+            }
 
-            return Unit.Value;
+            return entity;
         }
     }
 }

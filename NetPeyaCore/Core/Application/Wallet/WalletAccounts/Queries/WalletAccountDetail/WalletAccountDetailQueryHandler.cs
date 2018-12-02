@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.WalletAccounts.Models;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
@@ -30,7 +31,7 @@ namespace Core.Application.Wallet.WalletAccounts.Queries
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(WalletAccount), request.ID);
+                return new WalletAccountDetailModel { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
             var queryEntry = (
@@ -62,7 +63,8 @@ namespace Core.Application.Wallet.WalletAccounts.Queries
                 WalletAccountCode = queryEntry.WalletAccountCode,
                 Name = queryEntry.Name,
                 Balance = queryEntry.Balance,
-                IsDefault = queryEntry.IsDefault
+                IsDefault = queryEntry.IsDefault,
+                statusCode = SharedStatusCodes.Retrieved
             };
         }
     }

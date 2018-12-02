@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Core.Persistence.Wallet;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,14 @@ namespace Core.Domain.Wallet.Entities
     public class WalletAccount : BaseEntity
     {
         public int ID { get; set; }
+
+        [Required]
         public int UserID { get; set; }
-        public int CurrencyID { get; set; }
-        public int WalletAccountCategoryID { get; set; }
+        public int? CurrencyID { get; set; }
+        public int? WalletAccountCategoryID { get; set; }
         public string WalletAccountCode { get; set; }
         public string Name { get; set; }
+
         public decimal Balance { get; set; }
         public bool IsDefault { get; set; }
         public DateTime CreatedAt { get; set; }
