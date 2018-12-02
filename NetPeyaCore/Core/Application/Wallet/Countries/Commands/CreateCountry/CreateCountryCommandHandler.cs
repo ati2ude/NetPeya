@@ -47,8 +47,6 @@ namespace Core.Application.Wallet.Countries.Commands
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            countryEntity.entityState = EntityState.Added;
-
             return countryEntity;
         }
     }

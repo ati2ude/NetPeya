@@ -44,8 +44,6 @@ namespace Core.Application.Wallet.Users.Commands.CreateUser
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            entity.entityState = EntityState.Added;
-
             return entity;
         }
     }

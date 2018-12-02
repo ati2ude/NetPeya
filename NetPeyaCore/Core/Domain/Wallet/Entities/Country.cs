@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class Country : BaseEntity
+    public class Country
     {
         public int ID { get; set; }
         public int DefaultCurrencyID { get; set; }

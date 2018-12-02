@@ -38,8 +38,6 @@ namespace Core.Application.Wallet.CardTypes.Commands.UpdateCardType
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
             return entity;
         }
     }

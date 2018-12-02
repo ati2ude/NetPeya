@@ -24,4 +24,28 @@
     <ProjectReference Include="..\..\NetPeyaCore\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Controllers\Wallet\SharedLocaleController\SharedLocaleController.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\Controllers\Wallet\CurrenciesController\CurrenciesController.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\Controllers\Wallet\CurrenciesController\CurrenciesController.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\Controllers\Wallet\RecipientsController\RecipientsController.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\Controllers\Wallet\RecipientsController\RecipientsController.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\SharedLocale.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\SharedLocale.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

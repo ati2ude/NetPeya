@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Application.Wallet.PaymentMethods.Commands.CreatePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Commands.DeletePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Commands.UpdatePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Queries.GetAllPaymentMethods;
 using Core.Application.Wallet.PaymentMethods.Queries.GetSinglePaymentMethod;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

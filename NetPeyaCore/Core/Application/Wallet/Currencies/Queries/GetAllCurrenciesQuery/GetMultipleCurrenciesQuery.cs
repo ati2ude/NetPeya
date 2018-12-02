@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.Currencies.Queries.GetAllCurrenciesQuery
 {
-    public class GetAllCurrenciesQuery : IRequest<List<Currency>>
+    public class GetMultipleCurrenciesQuery : IRequest<List<Currency>>
     {
     }
 }

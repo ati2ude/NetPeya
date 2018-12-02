@@ -44,8 +44,6 @@ namespace Core.Application.Wallet.CardTypes.Commands.CreateCardType
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            cardTypeEntity.entityState = EntityState.Added;
-
             return cardTypeEntity;
         }
     }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Application.Wallet.Currencies.Commands.Models;
 using Microsoft.EntityFrameworkCore;
+using Core.Application.StatusCodes;
 
 namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 {
@@ -33,7 +34,8 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(Currency), request.Code);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             var currencyEntity = new Currency
@@ -46,9 +48,14 @@ namespace Core.Application.Wallet.Currencies.Commands.CreateCurrency
 
             _context.Currencies.Add(currencyEntity);
 
-            await _context.SaveChangesAsync(cancellationToken);
-
-            currencyEntity.entityState = EntityState.Added;
+            if(await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Created;
+            }
+            else
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return currencyEntity;
         }
