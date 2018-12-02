@@ -3,16 +3,15 @@ using Core.Application.Interfaces;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.Users.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Unit>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, User>
     {
         private readonly WalletDbContext _context;
         private readonly INotificationService _notificationService;
@@ -25,7 +24,7 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
             _notificationService = notificationService;
         }
 
-        public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<User> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var entity = _context.Users.SingleOrDefault(b => b.Email == request.Email);
 
@@ -51,29 +50,55 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
 
             _context.Users.Add(user_entity);
 
-            await _context.SaveChangesAsync(cancellationToken);
-
-            _context.Entry(user_entity).GetDatabaseValues();
-
-            // Create WalletAccount Entity
-            var defaultWalletCategory = new WalletAccountCategory().GetWalletAccountCategory(_context);
-
-            WalletAccount wallet_account_entity = new WalletAccount
+            try
             {
-                UserID = user_entity.ID,
-                CurrencyID = request.CurrencyID,
-                WalletAccountCategoryID = defaultWalletCategory.ID,
-                WalletAccountCode = WalletAccount.generateWalletAccountCode(user_entity.ID),
-                Name = defaultWalletCategory.Name,
-                Balance = 0,
-                IsDefault = true
-            };
+                if (await _context.SaveChangesAsync(cancellationToken) > 0)
+                {
+                    try
+                    {
+                        _context.Entry(user_entity).GetDatabaseValues();
 
-            _context.WalletAccounts.Add(wallet_account_entity);
+                        // Create WalletAccount Entity
+                        var defaultWalletCategory = new WalletAccountCategory().GetWalletAccountCategory(_context);
 
-            await _context.SaveChangesAsync(cancellationToken);
+                        WalletAccount wallet_account_entity = new WalletAccount
+                        {
+                            UserID = user_entity.ID,
+                            CurrencyID = request.CurrencyID,
+                            WalletAccountCategoryID = defaultWalletCategory.ID,
+                            WalletAccountCode = WalletAccount.generateWalletAccountCode(user_entity.ID),
+                            Name = defaultWalletCategory.Name,
+                            Balance = 0,
+                            IsDefault = true
+                        };
 
-            return Unit.Value;
+                        _context.WalletAccounts.Add(wallet_account_entity);
+
+                        if (await _context.SaveChangesAsync(cancellationToken) > 0)
+                        {
+                            
+                        }
+                        else
+                        {
+                            _context.Users.Remove(user_entity);
+                            await _context.SaveChangesAsync(cancellationToken);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        _context.Users.Remove(user_entity);
+                        await _context.SaveChangesAsync(cancellationToken);
+
+                        
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            return user_entity;
         }
     }
 }

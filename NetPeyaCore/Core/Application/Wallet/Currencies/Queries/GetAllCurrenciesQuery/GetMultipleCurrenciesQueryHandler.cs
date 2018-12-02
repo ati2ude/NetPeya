@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -11,20 +12,22 @@ using System.Threading.Tasks;
 
 namespace Core.Application.Wallet.Currencies.Queries.GetAllCurrenciesQuery
 {
-    class GetAllCurrenciesQueryHandler : IRequestHandler<GetAllCurrenciesQuery, List<Currency>>
+    class GetMultipleCurrenciesQueryHandler : IRequestHandler<GetMultipleCurrenciesQuery, List<Currency>>
     {
         private readonly WalletDbContext _context;
 
-        public GetAllCurrenciesQueryHandler(WalletDbContext context)
+        public GetMultipleCurrenciesQueryHandler(WalletDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Currency>> Handle(GetAllCurrenciesQuery request, CancellationToken cancellationToken)
+        public async Task<List<Currency>> Handle(GetMultipleCurrenciesQuery request, CancellationToken cancellationToken)
         {
             await _context.SaveChangesAsync();
 
             var currencies = _context.Currencies.ToList();
+
+            currencies.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
 
             return currencies;
         }

@@ -34,8 +34,6 @@ namespace Core.Application.Wallet.CardTypes.Commands.DeleteCardType
 
             await _context.SaveChangesAsync();
 
-            entity.entityState = EntityState.Deleted;
-
             return entity;
         }
     }

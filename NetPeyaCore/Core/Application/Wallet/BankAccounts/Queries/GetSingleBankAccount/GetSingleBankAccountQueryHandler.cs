@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -21,15 +22,17 @@ namespace Core.Application.Wallet.BankAccounts.Queries.GetSingleBankAccount
 
         public async Task<BankAccount> Handle(GetSingleBankAccountQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.BankAccounts
+            var bankAccountEntity = await _context.BankAccounts
                 .FindAsync(request.BankAccountID);
 
-            if (entity == null)
+            if (bankAccountEntity == null)
             {
-                throw new NotFoundException(nameof(Currency), request.BankAccountID);
+                return new BankAccount { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            return entity;
+            bankAccountEntity.statusCode = SharedStatusCodes.Retrieved;
+
+            return bankAccountEntity;
         }
     }
 }

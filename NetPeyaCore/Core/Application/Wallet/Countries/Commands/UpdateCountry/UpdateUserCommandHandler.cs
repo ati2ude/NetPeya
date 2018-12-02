@@ -41,8 +41,6 @@ namespace Core.Application.Wallet.Countries.Commands.UpdateUser
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
             return entity;
         }
     }

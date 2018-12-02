@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Core.Application.Wallet.WalletAccounts.Commands.CreateWalletAccount;
 using Core.Application.Wallet.WalletAccounts.Queries;
 using Core.Application.Wallet.WalletAccounts.Queries.GetUserWalletAccounts;
+using Microsoft.Extensions.Localization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

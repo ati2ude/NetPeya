@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.BankAccounts.Commands.CreateBankAccount.UpdateBankAccount;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
@@ -32,7 +33,7 @@ namespace Core.Application.Wallet.BankAccounts.Commands.UpdateBankAccount
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(BankAccount), request.ID);
+                return new BankAccount { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
             if (!string.IsNullOrEmpty(request.Beneficiary)) entity.Beneficiary = request.Beneficiary;
@@ -56,9 +57,20 @@ namespace Core.Application.Wallet.BankAccounts.Commands.UpdateBankAccount
 
             entity.IsDefault = request.IsDefault;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (!_context.Entry(entity).Context.ChangeTracker.HasChanges())
+            {
+                entity.statusCode = SharedStatusCodes.Unchanged;
+                return entity;
+            }
 
-            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                entity.statusCode = SharedStatusCodes.Updated;
+            }
+            else
+            {
+                entity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return entity;
         }

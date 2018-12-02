@@ -34,8 +34,6 @@ namespace Core.Application.Wallet.Countries.Commands.DeleteCountry
 
             await _context.SaveChangesAsync();
 
-            entity.entityState = EntityState.Deleted;
-
             return entity;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.Currencies.Commands.Models;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
@@ -26,16 +27,16 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
 
         public async Task<Currency> Handle(UpdateCurrencyCommand request, CancellationToken cancellationToken)
         {
-            var entity = _context.Currencies.SingleOrDefault(b => b.ID == request.ID);
+            var currencyEntity = _context.Currencies.SingleOrDefault(b => b.ID == request.ID);
 
-            if (entity == null)
+            if (currencyEntity == null)
             {
-                throw new NotFoundException(nameof(Currency), request.ID);
+                return new Currency { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            if (!string.IsNullOrEmpty(request.Name)) entity.Name = request.Name;
-            if (!string.IsNullOrEmpty(request.Code)) entity.Code = request.Code;
-            if (!string.IsNullOrEmpty(request.Symbol)) entity.Symbol = request.Symbol;
+            if (!string.IsNullOrEmpty(request.Name)) currencyEntity.Name = request.Name;
+            if (!string.IsNullOrEmpty(request.Code)) currencyEntity.Code = request.Code;
+            if (!string.IsNullOrEmpty(request.Symbol)) currencyEntity.Symbol = request.Symbol;
 
             if (request.AddOnRegistration)
             {
@@ -45,13 +46,24 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
                 }
             }
 
-            entity.AddOnRegistration = request.AddOnRegistration;
+            currencyEntity.AddOnRegistration = request.AddOnRegistration;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (!_context.Entry(currencyEntity).Context.ChangeTracker.HasChanges())
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Unchanged;
+                return currencyEntity;
+            }
 
-            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Updated;
+            }
+            else
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
-            return entity;
+            return currencyEntity;
         }
     }
 }

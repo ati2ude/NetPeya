@@ -5,6 +5,7 @@ using Core.Application.Wallet.Countries.Commands.UpdateUser;
 using Core.Application.Wallet.Countries.Queries;
 using Core.Application.Wallet.Countries.Queries.GetAllCountries;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

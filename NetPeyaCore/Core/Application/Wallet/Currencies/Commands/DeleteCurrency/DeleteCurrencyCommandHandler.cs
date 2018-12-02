@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -22,21 +23,26 @@ namespace Core.Application.Wallet.Currencies.Commands.DeleteCurrency
 
         public async Task<Currency> Handle(DeleteCurrencyCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Currencies
-                .FindAsync(request.CurrencyID);
+            var currencyEntity = await _context.Currencies
+                .FindAsync(request.ID);
 
-            if (entity == null)
+            if (currencyEntity == null)
             {
-                throw new NotFoundException(nameof(Currency), request.CurrencyID);
+                return new Currency { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            _context.Currencies.Remove(entity);
+            _context.Currencies.Remove(currencyEntity);
 
-            await _context.SaveChangesAsync();
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Deleted;
+            }
+            else
+            {
+                currencyEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
-            entity.entityState = EntityState.Deleted;
-
-            return entity;
+            return currencyEntity;
         }
     }
 }

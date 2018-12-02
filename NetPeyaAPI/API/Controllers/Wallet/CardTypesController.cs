@@ -5,6 +5,7 @@ using Core.Application.Wallet.CardTypes.Commands.UpdateCardType;
 using Core.Application.Wallet.CardTypes.Queries.GetAllCardTypes;
 using Core.Application.Wallet.CardTypes.Queries.GetSingleCardType;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

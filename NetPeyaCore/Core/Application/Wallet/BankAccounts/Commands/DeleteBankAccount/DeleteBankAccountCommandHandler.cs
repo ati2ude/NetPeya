@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -23,18 +24,23 @@ namespace Core.Application.Wallet.BankAccounts.Commands.DeleteBankAccount
         public async Task<BankAccount> Handle(DeleteBankAccountCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.BankAccounts
-                .FindAsync(request.BankAccountID);
+                .FindAsync(request.ID);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(BankAccount), request.BankAccountID);
+                return new BankAccount { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
             _context.BankAccounts.Remove(entity);
 
-            await _context.SaveChangesAsync();
-
-            entity.entityState = EntityState.Deleted;
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                entity.statusCode = SharedStatusCodes.Deleted;
+            }
+            else
+            {
+                entity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return entity;
         }

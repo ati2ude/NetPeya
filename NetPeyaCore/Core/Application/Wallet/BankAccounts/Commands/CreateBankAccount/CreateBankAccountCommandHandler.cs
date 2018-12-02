@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -32,7 +33,8 @@ namespace Core.Application.Wallet.BankAccounts.Commands.CreateBankAccount
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(BankAccount), request.Number);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             var bankEntity = new BankAccount
@@ -52,9 +54,14 @@ namespace Core.Application.Wallet.BankAccounts.Commands.CreateBankAccount
 
             _context.BankAccounts.Add(bankEntity);
 
-            await _context.SaveChangesAsync(cancellationToken);
-
-            bankEntity.entityState = EntityState.Added;
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                bankEntity.statusCode = SharedStatusCodes.Created;
+            }
+            else
+            {
+                bankEntity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return bankEntity;
         }

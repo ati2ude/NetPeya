@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Core.Application.Wallet.Users.Commands.RegisterUser;
 using Core.Application.Wallet.Users.Queries.GetUserDetails;
+using Microsoft.Extensions.Localization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

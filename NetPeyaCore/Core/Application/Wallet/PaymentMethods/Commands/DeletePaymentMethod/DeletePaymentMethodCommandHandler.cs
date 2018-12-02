@@ -34,8 +34,6 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.DeletePaymentMethod
 
             await _context.SaveChangesAsync();
 
-            entity.entityState = EntityState.Deleted;
-
             return entity;
         }
     }

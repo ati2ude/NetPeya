@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Core.Application.Wallet.Countries.Commands;
+using System.Globalization;
 
 namespace WalletAPI
 {
@@ -50,12 +51,15 @@ namespace WalletAPI
                     .AllowCredentials());
             });
 
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             // Add DbContext using SQL Server Provider
             services.AddDbContext<WalletDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WalletDatabase")));
 
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .AddDataAnnotationsLocalization()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateWalletCommandValidator>());
 
@@ -80,6 +84,20 @@ namespace WalletAPI
                 //app.UseHsts();
             }
 
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("es")
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
+            app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseMvc();
         }

@@ -42,8 +42,6 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.UpdatePaymentMethod
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            entity.entityState = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
             return entity;
         }
     }
