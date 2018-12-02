@@ -1,9 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using API.APIResponse.Wallet;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.PaymentMethods.Commands.CreatePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Commands.DeletePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Commands.UpdatePaymentMethod;
 using Core.Application.Wallet.PaymentMethods.Queries.GetAllPaymentMethods;
 using Core.Application.Wallet.PaymentMethods.Queries.GetSinglePaymentMethod;
+using Core.Domain.Wallet.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -13,18 +18,54 @@ namespace API.Controllers.Wallet
 {
     public class PaymentMethodsController : WalletBaseController
     {
+        private readonly IStringLocalizer<PaymentMethodsController> _localizer;
+        private readonly IStringLocalizer<SharedLocaleController.SharedLocaleController> _baseLocalizer;
+
+        public PaymentMethodsController(
+            IStringLocalizer<SharedLocaleController.SharedLocaleController> baseLocalizer,
+            IStringLocalizer<PaymentMethodsController> localizer)
+        {
+            _localizer = localizer;
+            _baseLocalizer = baseLocalizer;
+        }
+
         // GET api/currencies/get/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await Mediator.Send(new GetSinglePaymentMethodQuery { ID = id }));
+            if (ModelState.IsValid)
+            {
+                PaymentMethod taskReturn = await Mediator.Send(new GetSinglePaymentMethodQuery { ID = id });
+                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // GET api/currencies/getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await Mediator.Send(new GetAllPaymentMethodsQuery()));
+            if (ModelState.IsValid)
+            {
+                List<PaymentMethod> taskReturn = await Mediator.Send(new GetMultiplePaymentMethodsQuery());
+
+                if (taskReturn.Count > 0)
+                {
+                    return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
+                }
+                else
+                {
+                    PaymentMethod method = new PaymentMethod { ID = 0, statusCode = SharedStatusCodes.NotFound };
+                    return Ok(new PaymentMethodsResponse(nameof(method), method, method.statusCode, _baseLocalizer, _localizer));
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // POST api/paymentmethods/create
@@ -33,12 +74,14 @@ namespace API.Controllers.Wallet
         {
             if (ModelState.IsValid)
             {
-                return Ok(await Mediator.Send(command));
-            } else
+                PaymentMethod taskReturn = await Mediator.Send(command);
+                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
             {
                 return BadRequest(ModelState);
             }
-                
+
         }
 
         // PUT api/paymentmethods/update/5
@@ -48,9 +91,10 @@ namespace API.Controllers.Wallet
             if (ModelState.IsValid)
             {
                 command.ID = id;
-
-                return Ok(await Mediator.Send(command));
-            } else
+                PaymentMethod taskReturn = await Mediator.Send(command);
+                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
             {
                 return BadRequest(ModelState);
             }
@@ -60,7 +104,15 @@ namespace API.Controllers.Wallet
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeletePaymentMethodCommand { ID = id }));
+            if (ModelState.IsValid)
+            {
+                PaymentMethod taskReturn = await Mediator.Send(new DeletePaymentMethodCommand { ID = id });
+                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -21,15 +22,17 @@ namespace Core.Application.Wallet.CardTypes.Queries.GetSingleCardType
 
         public async Task<CardType> Handle(GetSingleCardTypeQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.CardTypes
+            var currencyEntity = await _context.CardTypes
                 .FindAsync(request.ID);
 
-            if (entity == null)
+            if (currencyEntity == null)
             {
-                throw new NotFoundException(nameof(CardType), request.ID);
+                return new CardType { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            return entity;
+            currencyEntity.statusCode = SharedStatusCodes.Retrieved;
+
+            return currencyEntity;
         }
     }
 }

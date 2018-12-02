@@ -8,12 +8,6 @@ namespace Core.Application.Wallet.WalletAccounts.Queries.GetUserWalletAccounts
 {
     public class GetUserWalletAccountsQuery : IRequest<List<WalletAccountDetailModel>>
     {
-        int _userID;
-
-        public int UserID
-        {
-            get { return _userID; }
-            set { _userID = Int32.Parse(value.ToString()); }
-        }
+        public int? UserID { get; set; }
     }
 }

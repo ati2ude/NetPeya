@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class PaymentMethod
+    public class PaymentMethod : BaseEntity
     {
         public int ID { get; set; }
         [Required]

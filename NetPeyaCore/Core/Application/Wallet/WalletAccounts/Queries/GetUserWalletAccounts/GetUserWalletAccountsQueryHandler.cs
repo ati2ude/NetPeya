@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.WalletAccounts.Models;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
@@ -72,6 +73,8 @@ namespace Core.Application.Wallet.WalletAccounts.Queries.GetUserWalletAccounts
                     }
                 );
             }
+
+            walletDetailsList.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
 
             return walletDetailsList;
         }

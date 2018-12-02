@@ -6,14 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.Countries.Queries
 {
-    public class GetSingleCountryQuery : IRequest<Country>
+    public class GetSingleCountryQuery : Country, IRequest<Country>
     {
-        int _Id;
-
-        public int ID
-        {
-            get { return _Id; }
-            set { _Id = Int32.Parse(value.ToString()); }
-        }
     }
 }

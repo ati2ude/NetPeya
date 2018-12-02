@@ -1,5 +1,6 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -29,7 +30,7 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.UpdatePaymentMethod
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(PaymentMethod), request.ID);
+                return new PaymentMethod { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
             if (entity.Name != request.Name) entity.Name = request.Name;
@@ -40,7 +41,20 @@ namespace Core.Application.Wallet.PaymentMethods.Commands.UpdatePaymentMethod
             if (request.AllowTransfer != null) entity.AllowTransfer = request.AllowTransfer;
             if (request.AllowWithdrawal != null) entity.AllowWithdrawal = request.AllowWithdrawal;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            if (!_context.Entry(entity).Context.ChangeTracker.HasChanges())
+            {
+                entity.statusCode = SharedStatusCodes.Unchanged;
+                return entity;
+            }
+
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+            {
+                entity.statusCode = SharedStatusCodes.Updated;
+            }
+            else
+            {
+                entity.statusCode = SharedStatusCodes.Failed;
+            }
 
             return entity;
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class BankAccount
+    public class BankAccount : BaseEntity
     {
         public int ID { get; set; }
         public bool IsDefault { get; set; }
@@ -35,8 +35,5 @@ namespace Core.Domain.Wallet.Entities
         public string Country { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [NotMapped]
-        public int statusCode { get; set; }
     }
 }

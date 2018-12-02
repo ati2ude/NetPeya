@@ -6,9 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.CardTypes.Models
 {
-    public class BaseCardTypeCommand : IRequest<CardType>
+    public class BaseCardTypeCommand : CardType, IRequest<CardType>
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
     }
 }

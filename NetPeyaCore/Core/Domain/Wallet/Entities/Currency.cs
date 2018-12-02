@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities
 {
-    public class Currency
+    public class Currency : BaseEntity
     {
         public int ID { get; set; }
 
@@ -20,8 +20,5 @@ namespace Core.Domain.Wallet.Entities
         public bool AddOnRegistration { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-        [NotMapped]
-        public int statusCode { get; set; }
     }
 }

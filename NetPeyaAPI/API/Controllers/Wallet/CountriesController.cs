@@ -1,9 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using API.APIResponse.Wallet;
+using Core.Application.StatusCodes;
 using Core.Application.Wallet.Countries.Commands;
 using Core.Application.Wallet.Countries.Commands.DeleteCountry;
 using Core.Application.Wallet.Countries.Commands.UpdateUser;
 using Core.Application.Wallet.Countries.Queries;
 using Core.Application.Wallet.Countries.Queries.GetAllCountries;
+using Core.Domain.Wallet.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -13,41 +18,100 @@ namespace API.Controllers.Wallet
 {
     public class CountriesController : WalletBaseController
     {
-        // GET api/currencies/get/5
+        private readonly IStringLocalizer<CountriesController> _localizer;
+        private readonly IStringLocalizer<SharedLocaleController.SharedLocaleController> _baseLocalizer;
+
+        public CountriesController(
+            IStringLocalizer<SharedLocaleController.SharedLocaleController> baseLocalizer,
+            IStringLocalizer<CountriesController> localizer)
+        {
+            _localizer = localizer;
+            _baseLocalizer = baseLocalizer;
+        }
+
+        // GET api/countries/get/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await Mediator.Send(new GetSingleCountryQuery { ID = id }));
+            if (ModelState.IsValid)
+            {
+                Country taskReturn = await Mediator.Send(new GetSingleCountryQuery { ID = id });
+                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
-        // GET api/currencies/getall
+        // GET api/countries/getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await Mediator.Send(new GetAllCountriesQuery()));
+            if (ModelState.IsValid)
+            {
+                List<Country> taskReturn = await Mediator.Send(new GetMultipleCountriesQuery());
+
+                if (taskReturn.Count > 0)
+                {
+                    return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
+                }
+                else
+                {
+                    Country country = new Country { ID = 0, statusCode = SharedStatusCodes.NotFound };
+                    return Ok(new CountriesResponse(nameof(Country), country, country.statusCode, _baseLocalizer, _localizer));
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // POST api/countries/create
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]CreateCountryCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            if (ModelState.IsValid)
+            {
+                Country taskReturn = await Mediator.Send(command);
+                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // PUT api/countries/update/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateCountryCommand command)
         {
-            command.ID = id;
-
-            return Ok(await Mediator.Send(command));
+            if (ModelState.IsValid)
+            {
+                command.ID = id;
+                Country taskReturn = await Mediator.Send(command);
+                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
 
         // DELETE api/countries/delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeleteCountryCommand { ID = id }));
+            if (ModelState.IsValid)
+            {
+                Country taskReturn = await Mediator.Send(new DeleteCountryCommand { ID = id });
+                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
     }
 }

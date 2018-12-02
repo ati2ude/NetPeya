@@ -1,5 +1,7 @@
 ﻿using Core.Application.Exceptions;
 using Core.Application.Interfaces;
+using Core.Application.StatusCodes;
+using Core.Application.Wallet.Users.Models;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -30,7 +32,8 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
 
             if (entity != null)
             {
-                throw new DuplicateEntriesException(nameof(User), request.Email);
+                entity.statusCode = SharedStatusCodes.Exists;
+                return entity;
             }
 
             // Create User Entity
@@ -76,12 +79,13 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
 
                         if (await _context.SaveChangesAsync(cancellationToken) > 0)
                         {
-                            
+                            user_entity.statusCode = SharedStatusCodes.Created;
                         }
                         else
                         {
                             _context.Users.Remove(user_entity);
                             await _context.SaveChangesAsync(cancellationToken);
+                            user_entity.statusCode = SharedStatusCodes.Failed;
                         }
                     }
                     catch (Exception)
@@ -89,13 +93,13 @@ namespace Core.Application.Wallet.Users.Commands.RegisterUser
                         _context.Users.Remove(user_entity);
                         await _context.SaveChangesAsync(cancellationToken);
 
-                        
+                        user_entity.statusCode = SharedStatusCodes.Failed;
                     }
                 }
             }
             catch (Exception)
             {
-                
+                user_entity.statusCode = SharedStatusCodes.Failed;
             }
 
             return user_entity;

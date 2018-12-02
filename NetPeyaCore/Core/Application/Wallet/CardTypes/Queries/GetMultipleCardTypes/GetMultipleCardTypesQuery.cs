@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Application.Wallet.CardTypes.Queries.GetAllCardTypes
 {
-    public class GetAllCardTypesQuery : IRequest<List<CardType>>
+    public class GetMultipleCardTypesQuery : IRequest<List<CardType>>
     {
     }
 }

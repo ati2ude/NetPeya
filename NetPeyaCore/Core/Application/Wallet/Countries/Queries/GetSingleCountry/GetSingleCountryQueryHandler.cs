@@ -1,4 +1,5 @@
 ﻿using Core.Application.Exceptions;
+using Core.Application.StatusCodes;
 using Core.Domain.Wallet.Entities;
 using Core.Persistence.Wallet;
 using MediatR;
@@ -21,15 +22,18 @@ namespace Core.Application.Wallet.Countries.Queries.GetSingleCountry
 
         public async Task<Country> Handle(GetSingleCountryQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Countries
+
+            var countryEntity = await _context.Countries
                 .FindAsync(request.ID);
 
-            if (entity == null)
+            if (countryEntity == null)
             {
-                throw new NotFoundException(nameof(Country), request.ID);
+                return new Country { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            return entity;
+            countryEntity.statusCode = SharedStatusCodes.Retrieved;
+
+            return countryEntity;
         }
     }
 }
