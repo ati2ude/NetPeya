@@ -21,6 +21,7 @@ namespace Core.Persistence.Wallet
         public DbSet<CardType> CardTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Recipient> Recipients { get; set; }
+        public DbSet<SavedCard> SavedCards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -65,9 +66,11 @@ namespace Core.Persistence.Wallet
             modelBuilder.Entity<Recipient>().Property(x => x.ID).ValueGeneratedOnAdd();
             modelBuilder.Entity<Recipient>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
             modelBuilder.Entity<Recipient>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
-
-            // CardType
-            modelBuilder.Entity<CardType>().Property(x => x.ID).ValueGeneratedOnAdd();
+    
+            // SavedCard
+            modelBuilder.Entity<SavedCard>().Property(x => x.ID).ValueGeneratedOnAdd();
+            modelBuilder.Entity<SavedCard>().Property(x => x.CreatedAt).ValueGeneratedOnAdd();
+            modelBuilder.Entity<SavedCard>().Property(x => x.UpdatedAt).ValueGeneratedOnAddOrUpdate();
 
             modelBuilder.ApplyAllConfigurations();
         }

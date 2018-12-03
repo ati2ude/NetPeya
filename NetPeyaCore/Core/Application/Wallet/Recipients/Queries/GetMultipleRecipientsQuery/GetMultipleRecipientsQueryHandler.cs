@@ -23,16 +23,23 @@ namespace Core.Application.Wallet.Recipients.Queries.GetMultipleRecipientsQuery
         {
             await _context.SaveChangesAsync();
 
-            List<Recipient> recipients;
-
-            if (request.UserID != null)
+            List<Recipient> recipients = new List<Recipient>();
+            try
             {
-                recipients = _context.Recipients.Where(x => x.UserID == request.UserID).ToList();
-                recipients.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
-            } else
+                if (request.UserID != null)
+                {
+                    recipients = _context.Recipients.Where(x => x.UserID == request.UserID).ToList();
+                    recipients.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
+                }
+                else
+                {
+                    recipients = _context.Recipients.ToList();
+                    recipients.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
+                }
+            }
+            catch (System.Exception)
             {
-                recipients = _context.Recipients.ToList();
-                recipients.FirstOrDefault().statusCode = SharedStatusCodes.Retrieved;
+                recipients = null;
             }
 
             return recipients;

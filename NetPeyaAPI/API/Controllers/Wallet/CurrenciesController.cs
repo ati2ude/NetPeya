@@ -51,7 +51,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             {
                 List<Currency> taskReturn = await Mediator.Send(new GetMultipleCurrenciesQuery());
 
-                if (taskReturn.Count > 0)
+                if (taskReturn != null && taskReturn.Count > 0)
                 {
                     return Ok(new CurrenciesResponse(nameof(Currency), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
                 }
