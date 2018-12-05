@@ -51,6 +51,10 @@ namespace API.APIResponse
                     Response.Add(_baseLocalizer["Status"].Value, _baseLocalizer["Failed"].Value);
                     Response.Add(_baseLocalizer["Message"].Value, _baseLocalizer["No new data was sent"].Value);
                     break;
+                case SharedStatusCodes.UserNotFound:
+                    Response.Add(_baseLocalizer["Status"].Value, _baseLocalizer["Failed"].Value);
+                    Response.Add(_baseLocalizer["Message"].Value, _baseLocalizer["User not found"].Value);
+                    break;
                 default:
                     break;
             }

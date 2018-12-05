@@ -14,5 +14,6 @@ namespace Core.Application.StatusCodes
         public const int Failed = 106;
         public const int NotFound = 107;
         public const int Unchanged = 108;
+        public const int UserNotFound = 109;
     }
 }
