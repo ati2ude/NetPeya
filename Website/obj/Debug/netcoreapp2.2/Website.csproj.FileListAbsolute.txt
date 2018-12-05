@@ -1,0 +1,11 @@
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\bin\Debug\netcoreapp2.2\Website.deps.json
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\bin\Debug\netcoreapp2.2\Website.runtimeconfig.json
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\bin\Debug\netcoreapp2.2\Website.runtimeconfig.dev.json
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\bin\Debug\netcoreapp2.2\Website.dll
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\bin\Debug\netcoreapp2.2\Website.pdb
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.csprojResolveAssemblyReference.cache
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.csproj.CoreCompileInputs.cache
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.AssemblyInfoInputs.cache
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.AssemblyInfo.cs
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.dll
+C:\Users\emmanuel\Documents\Personal\NetPeya\Website\obj\Debug\netcoreapp2.2\Website.pdb

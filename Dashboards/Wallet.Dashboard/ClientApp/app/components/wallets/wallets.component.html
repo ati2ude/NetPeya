@@ -10,7 +10,7 @@
                     <div class="np-search">
                         <div class="element-search"><input class="form-control" placeholder="Search your wallets..." type="text"></div>
                     </div>
-                    <div class="user-list" *ngFor="let walletAccount of allWalletAccounts">
+                    <div class="user-list" ng-show="allWalletAccounts != null" *ngFor="let walletAccount of allWalletAccounts">
                         <div class="user-w" (click)="activeWalletAccount = walletAccount">
                             <div class="user-info">
                                 <div class="user-date"><strong>{{walletAccount.currency.symbol}}</strong>{{fomartBalance(walletAccount.balance)}}</div>
