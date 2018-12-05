@@ -128,7 +128,7 @@ CREATE TABLE [dbo].[Currencies]
 (
  [ID]                int IDENTITY (1, 1) NOT NULL ,
  [Name]              varchar(50) NOT NULL ,
- [Symbol]            varchar(1) NOT NULL ,
+ [Symbol]            varchar(3) NOT NULL ,
  [Code]              varchar(4) NOT NULL ,
  [AddOnRegistration] bit NOT NULL CONSTRAINT [DF_Currencies_AddOnRegistration] DEFAULT 0 ,
  [CreatedAt]         datetime NOT NULL CONSTRAINT [DF_Currencies_CreatedAt] DEFAULT GETDATE() ,

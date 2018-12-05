@@ -24,7 +24,7 @@ namespace API.Controllers.Wallet
             _baseLocalizer = baseLocalizer;
         }
 
-        // POST api/customers
+        // POST api/wallet/users/register
         [HttpPost]
         public async Task<IActionResult> Register([FromForm]RegisterUserCommand command)
         {
@@ -39,6 +39,7 @@ namespace API.Controllers.Wallet
             }
         }
 
+        // GET api/wallet/users/getuserdetails/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserDetails(int id)
         {

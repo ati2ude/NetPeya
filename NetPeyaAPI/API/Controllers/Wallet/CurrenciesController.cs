@@ -28,7 +28,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             _baseLocalizer = baseLocalizer;
         }
 
-        // GET api/currencies/get/5
+        // GET api/wallet/currencies/get/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -43,7 +43,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             }
         }
 
-        // GET api/currencies/getall
+        // GET api/wallet/currencies/getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -67,7 +67,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             }
         }
 
-        // POST api/currencies/create
+        // POST api/wallet/currencies/create
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateCurrencyCommand command)
         {
@@ -82,7 +82,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             }
         }
 
-        // PUT api/currencies/update/5
+        // PUT api/wallet/currencies/update/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateCurrencyCommand command)
         {
@@ -98,7 +98,7 @@ namespace API.Controllers.Wallet.CurrenciesController
             }
         }
 
-        // DELETE api/currencies/delete/5
+        // DELETE api/wallet/currencies/delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

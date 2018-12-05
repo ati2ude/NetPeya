@@ -34,19 +34,19 @@ namespace Core.Application.Wallet.Currencies.Commands.UpdateCurrency
                 return new Currency { ID = 0, statusCode = SharedStatusCodes.NotFound };
             }
 
-            if (!string.IsNullOrEmpty(request.Name)) currencyEntity.Name = request.Name;
-            if (!string.IsNullOrEmpty(request.Code)) currencyEntity.Code = request.Code;
-            if (!string.IsNullOrEmpty(request.Symbol)) currencyEntity.Symbol = request.Symbol;
+            if (request.Name != null) currencyEntity.Name = request.Name;
+            if (request.Code != null) currencyEntity.Code = request.Code;
+            if (request.Symbol != null) currencyEntity.Symbol = request.Symbol;
         
-            if (request.AddOnRegistration)
+            if (request.AddOnRegistration != null && request.AddOnRegistration == true)
             {
                 foreach (var crr in _context.Currencies.Where(x => x.AddOnRegistration == true).ToList())
                 {
                     crr.AddOnRegistration = false;
                 }
-            }
 
-            currencyEntity.AddOnRegistration = request.AddOnRegistration;
+                currencyEntity.AddOnRegistration = request.AddOnRegistration;
+            }
 
             if (!_context.Entry(currencyEntity).Context.ChangeTracker.HasChanges())
             {

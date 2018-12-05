@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Wallet.Entities
 {
@@ -12,12 +8,16 @@ namespace Core.Domain.Wallet.Entities
         public int ID { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
         [Required]
+        [StringLength(3, MinimumLength = 1)]
         public string Symbol { get; set; }
         [Required]
+        [StringLength(4, MinimumLength = 2)]
         public string Code { get; set; }
-        public bool AddOnRegistration { get; set; }
+        [Required]
+        public bool? AddOnRegistration { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
