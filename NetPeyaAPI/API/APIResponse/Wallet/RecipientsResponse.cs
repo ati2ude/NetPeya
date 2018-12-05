@@ -23,10 +23,6 @@ namespace API.APIResponse.Recipients
                     Response.Add(_baseLocalizer["Status"].Value, _baseLocalizer["Failed"].Value);
                     Response.Add(_baseLocalizer["Message"].Value, _recipientLocalizer["please_provide_either_email_or_phone"].Value);
                     break;
-                case RecipientStatusCodes.UserNotFound:
-                    Response.Add(_baseLocalizer["Status"].Value, _baseLocalizer["Failed"].Value);
-                    Response.Add(_baseLocalizer["Message"].Value, _recipientLocalizer["User not found"].Value);
-                    break;
                 default:
                     break;
             }

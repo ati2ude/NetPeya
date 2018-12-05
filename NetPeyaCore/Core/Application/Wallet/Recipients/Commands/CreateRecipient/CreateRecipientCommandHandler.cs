@@ -34,7 +34,7 @@ namespace Core.Application.Wallet.Recipients.Commands.CreateRecipient
 
             if (user == null)
             {
-                return new Recipient { ID = 0, statusCode = RecipientStatusCodes.UserNotFound };
+                return new Recipient { ID = 0, statusCode = SharedStatusCodes.UserNotFound };
             }
 
             var entity = _context.Recipients.Where(e => e.UserID == request.UserID && ((e.Email == request.Email && e.Email != null) || (e.Phone == request.Phone && e.Phone != null))).FirstOrDefault();
