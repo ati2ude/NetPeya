@@ -28,7 +28,7 @@ namespace API.Controllers.Wallet.RecipientsController
             _baseLocalizer = baseLocalizer;
         }
 
-        // GET api/recipients/get/5
+        // GET api/wallet/recipients/get/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -36,7 +36,7 @@ namespace API.Controllers.Wallet.RecipientsController
             return Ok(new RecipientsResponse(nameof(Recipient), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
         }
 
-        // GET api/currencies/getall
+        // GET api/wallet/recipients/getall
         [HttpPost]
         public async Task<IActionResult> GetAll([FromForm] GetMultipleRecipientsQuery command)
         {
@@ -44,7 +44,7 @@ namespace API.Controllers.Wallet.RecipientsController
             return Ok(new RecipientsResponse(nameof(Recipient), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
         }
 
-        // POST api/recipients/create
+        // POST api/wallet/recipients/create
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateRecipientCommand command)
         {
@@ -60,7 +60,7 @@ namespace API.Controllers.Wallet.RecipientsController
 
         }
 
-        // POST api/recipients/update/1
+        // POST api/wallet/recipients/update/1
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateRecipientCommand command)
         {
@@ -78,7 +78,7 @@ namespace API.Controllers.Wallet.RecipientsController
 
         }
 
-        // DELETE api/recipients/delete/5
+        // DELETE api/wallet/recipients/delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

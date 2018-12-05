@@ -29,7 +29,7 @@ namespace API.Controllers.Wallet
             _baseLocalizer = baseLocalizer;
         }
 
-        // GET api/countries/get/5
+        // GET api/wallet/countries/get/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -44,7 +44,7 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // GET api/countries/getall
+        // GET api/wallet/countries/getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -68,7 +68,7 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // POST api/countries/create
+        // POST api/wallet/countries/create
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]CreateCountryCommand command)
         {
@@ -83,7 +83,7 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // PUT api/countries/update/5
+        // PUT api/wallet/countries/update/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateCountryCommand command)
         {
@@ -99,7 +99,7 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // DELETE api/countries/delete/5
+        // DELETE api/wallet/countries/delete/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
