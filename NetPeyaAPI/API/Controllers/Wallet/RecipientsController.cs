@@ -27,25 +27,25 @@ namespace API.Controllers.Wallet.RecipientsController
             _localizer = localizer;
             _baseLocalizer = baseLocalizer;
         }
-
-        // GET api/wallet/recipients/get/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            Recipient taskReturn = await Mediator.Send(new GetSingleRecipientQuery { ID = id });
-            return Ok(new RecipientsResponse(nameof(Recipient), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
-        }
-
-        // GET api/wallet/recipients/getall
+        
         [HttpPost]
-        public async Task<IActionResult> GetAll([FromForm] GetMultipleRecipientsQuery command)
+        [Route("api/wallet/recipients")]
+        public async Task<IActionResult> GetRecipients([FromForm] GetMultipleRecipientsQuery command)
         {
             List<Recipient> taskReturn = await Mediator.Send(command);
             return Ok(new RecipientsResponse(nameof(Recipient), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
         }
-
-        // POST api/wallet/recipients/create
+        
+        [HttpGet("{id}")]
+        [Route("api/wallet/recipients/{id}")]
+        public async Task<IActionResult> GetSingle(int id)
+        {
+            Recipient taskReturn = await Mediator.Send(new GetSingleRecipientQuery { ID = id });
+            return Ok(new RecipientsResponse(nameof(Recipient), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+        }
+        
         [HttpPost]
+        [Route("api/wallet/recipients/add")]
         public async Task<IActionResult> Create([FromForm] CreateRecipientCommand command)
         {
             if (ModelState.IsValid)
@@ -59,9 +59,9 @@ namespace API.Controllers.Wallet.RecipientsController
             }
 
         }
-
-        // POST api/wallet/recipients/update/1
+        
         [HttpPut("{id}")]
+        [Route("api/wallet/recipients/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateRecipientCommand command)
         {
             command.ID = id;
@@ -77,9 +77,9 @@ namespace API.Controllers.Wallet.RecipientsController
             }
 
         }
-
-        // DELETE api/wallet/recipients/delete/5
+        
         [HttpDelete("{id}")]
+        [Route("api/wallet/recipients/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

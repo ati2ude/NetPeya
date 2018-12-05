@@ -4,7 +4,6 @@
 
 namespace API.Controllers.Wallet
 {
-    [Route("api/wallet/[controller]/[action]")]
     public class WalletBaseController : BaseController
     {
     }

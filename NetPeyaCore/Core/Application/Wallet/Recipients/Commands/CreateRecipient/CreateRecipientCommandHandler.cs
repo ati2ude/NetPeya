@@ -30,6 +30,13 @@ namespace Core.Application.Wallet.Recipients.Commands.CreateRecipient
                 return new Recipient { statusCode = RecipientStatusCodes.MissingEmailandPhone };
             }
 
+            var user = _context.Users.Where(e => e.ID == request.UserID ).FirstOrDefault();
+
+            if (user == null)
+            {
+                return new Recipient { ID = 0, statusCode = RecipientStatusCodes.UserNotFound };
+            }
+
             var entity = _context.Recipients.Where(e => e.UserID == request.UserID && ((e.Email == request.Email && e.Email != null) || (e.Phone == request.Phone && e.Phone != null))).FirstOrDefault();
 
             if (entity != null)
