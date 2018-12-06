@@ -27,24 +27,9 @@ namespace API.Controllers.Wallet.CurrenciesController
             _localizer = localizer;
             _baseLocalizer = baseLocalizer;
         }
-
-        // GET api/wallet/currencies/get/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                Currency taskReturn = await Mediator.Send(new GetSingleCurrencyQuery { CurrencyID = id });
-                return Ok(new CurrenciesResponse(nameof(Currency), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        // GET api/wallet/currencies/getall
+        
         [HttpGet]
+        [Route("api/wallet/currencies")]
         public async Task<IActionResult> GetAll()
         {
             if (ModelState.IsValid)
@@ -67,8 +52,23 @@ namespace API.Controllers.Wallet.CurrenciesController
             }
         }
 
-        // POST api/wallet/currencies/create
+        [HttpGet("{id}")]
+        [Route("api/wallet/currencies/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Currency taskReturn = await Mediator.Send(new GetSingleCurrencyQuery { CurrencyID = id });
+                return Ok(new CurrenciesResponse(nameof(Currency), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+       
         [HttpPost]
+        [Route("api/wallet/currencies/add")]
         public async Task<IActionResult> Create([FromForm] CreateCurrencyCommand command)
         {
             if (ModelState.IsValid)
@@ -81,9 +81,9 @@ namespace API.Controllers.Wallet.CurrenciesController
                 return BadRequest(ModelState);
             }
         }
-
-        // PUT api/wallet/currencies/update/5
+        
         [HttpPut("{id}")]
+        [Route("api/wallet/currencies/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateCurrencyCommand command)
         {
             if (ModelState.IsValid)
@@ -97,9 +97,9 @@ namespace API.Controllers.Wallet.CurrenciesController
                 return BadRequest(ModelState);
             }
         }
-
-        // DELETE api/wallet/currencies/delete/5
+        
         [HttpDelete("{id}")]
+        [Route("api/wallet/currencies/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

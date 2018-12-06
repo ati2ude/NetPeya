@@ -28,24 +28,9 @@ namespace API.Controllers.Wallet
             _localizer = localizer;
             _baseLocalizer = baseLocalizer;
         }
-
-        // GET api/wallet/countries/get/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                Country taskReturn = await Mediator.Send(new GetSingleCountryQuery { ID = id });
-                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        // GET api/wallet/countries/getall
+        
         [HttpGet]
+        [Route("api/wallet/countries")]
         public async Task<IActionResult> GetAll()
         {
             if (ModelState.IsValid)
@@ -68,8 +53,23 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // POST api/wallet/countries/create
+        [HttpGet("{id}")]
+        [Route("api/wallet/countries/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Country taskReturn = await Mediator.Send(new GetSingleCountryQuery { ID = id });
+                return Ok(new CountriesResponse(nameof(Country), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+        
         [HttpPost]
+        [Route("api/wallet/countries/add")]
         public async Task<IActionResult> Create([FromForm]CreateCountryCommand command)
         {
             if (ModelState.IsValid)
@@ -82,9 +82,9 @@ namespace API.Controllers.Wallet
                 return BadRequest(ModelState);
             }
         }
-
-        // PUT api/wallet/countries/update/5
+        
         [HttpPut("{id}")]
+        [Route("api/wallet/countries/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateCountryCommand command)
         {
             if (ModelState.IsValid)
@@ -99,8 +99,8 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // DELETE api/wallet/countries/delete/5
         [HttpDelete("{id}")]
+        [Route("api/wallet/countries/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

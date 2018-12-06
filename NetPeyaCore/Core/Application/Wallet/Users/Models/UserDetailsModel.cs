@@ -8,7 +8,7 @@ namespace Core.Application.Wallet.Users.Models
 {
     public class UserDetailsModel : User
     {
-        public Country Country { get; set; }
         public int UserID { get; set; }
+        public Country Country { get; set; }
     }
 }

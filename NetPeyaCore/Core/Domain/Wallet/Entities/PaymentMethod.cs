@@ -12,11 +12,9 @@ namespace Core.Domain.Wallet.Entities
         public string Name { get; set; }
         public string Icon { get; set; }
         [Required]
-        [Range(0.01, 100)]
-        public decimal? ExternalCharges { get; set; }
+        public decimal ExternalCharges { get; set; }
         [Required]
-        [Range(0.01, 100)]
-        public decimal? InternalCharges { get; set; }
+        public decimal InternalCharges { get; set; }
         public bool? AllowDeposit { get; set; }
         public bool? AllowTransfer { get; set; }
         public bool? AllowWithdrawal { get; set; }

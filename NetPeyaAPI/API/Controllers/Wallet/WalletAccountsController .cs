@@ -28,9 +28,9 @@ namespace API.Controllers.Wallet
             _localizer = localizer;
             _baseLocalizer = baseLocalizer;
         }
-
-        // POST api/wallet/walletaccounts/create
+        
         [HttpPost]
+        [Route("api/wallet/savedcards/add")]
         public async Task<IActionResult> Create([FromForm]CreateWalletAccountCommand command)
         {
             if (ModelState.IsValid)
@@ -43,9 +43,9 @@ namespace API.Controllers.Wallet
                 return BadRequest(ModelState);
             }
         }
-
-        // GET api/wallet/walletaccounts/getdetails/5
+        
         [HttpGet("{id}")]
+        [Route("api/wallet/savedcards/{id}")]
         public async Task<IActionResult> GetDetails(int id)
         {
             if (ModelState.IsValid)
@@ -59,8 +59,8 @@ namespace API.Controllers.Wallet
             }
         }
         
-        // GET api/wallet/walletaccounts/getuserwalletaccounts/5
         [HttpGet("{id}")]
+        [Route("api/wallet/savedcards/getbyuser/{id}")]
         public async Task<IActionResult> GetUserWalletAccounts(int id)
         {
             if (ModelState.IsValid)
@@ -74,8 +74,8 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // PUT api/wallet/walletaccounts/update/5
         [HttpPut("{id}")]
+        [Route("api/wallet/savedcards/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateWalletAccountCommand command)
         {
             if (ModelState.IsValid)
@@ -89,9 +89,9 @@ namespace API.Controllers.Wallet
                 return BadRequest(ModelState);
             }
         }
-
-        // DELETE api/wallet/walletaccounts/delete/5
+        
         [HttpDelete("{id}")]
+        [Route("api/wallet/savedcards/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

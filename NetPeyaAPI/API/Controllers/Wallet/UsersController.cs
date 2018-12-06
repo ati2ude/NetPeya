@@ -24,8 +24,15 @@ namespace API.Controllers.Wallet
             _baseLocalizer = baseLocalizer;
         }
 
-        // POST api/wallet/users/register
+        [HttpGet("{id}")]
+        [Route("api/wallet/users/{id}")]
+        public async Task<IActionResult> GetUserDetails(int id)
+        {
+            return Ok(await Mediator.Send(new GetUserDetailsQuery { UserID = id }));
+        }
+
         [HttpPost]
+        [Route("api/wallet/users/register")]
         public async Task<IActionResult> Register([FromForm]RegisterUserCommand command)
         {
             if (ModelState.IsValid)
@@ -37,13 +44,6 @@ namespace API.Controllers.Wallet
             {
                 return BadRequest(ModelState);
             }
-        }
-
-        // GET api/wallet/users/getuserdetails/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserDetails(int id)
-        {
-            return Ok(await Mediator.Send(new GetUserDetailsQuery { UserID = id }));
         }
     }
 }
