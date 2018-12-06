@@ -74,13 +74,13 @@ namespace WalletAPI
 
             var supportedCultures = new[]
             {
-                new CultureInfo("en-US"),
+                new CultureInfo("en-UK"),
                 new CultureInfo("es")
             };
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es"),
+                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             });

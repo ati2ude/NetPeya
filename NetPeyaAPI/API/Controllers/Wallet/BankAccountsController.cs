@@ -29,30 +29,15 @@ namespace API.Controllers.Wallet
             _baseLocalizer = baseLocalizer;
         }
 
-        // GET api/wallet/bankaccounts/get/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                BankAccount taskReturn = await Mediator.Send(new GetSingleBankAccountQuery { BankAccountID = id });
-                return Ok(new BankAccountsResponse(nameof(BankAccount), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        // GET api/wallet/bankaccounts/getall
         [HttpPost]
+        [Route("api/wallet/bankaccounts")]
         public async Task<IActionResult> GetAll([FromForm] GetMultipleBankAccountsQuery command)
         {
             if (ModelState.IsValid)
             {
                 List<BankAccount> taskReturn = await Mediator.Send(command);
 
-                if(taskReturn.Count > 0)
+                if (taskReturn.Count > 0)
                 {
                     return Ok(new BankAccountsResponse(nameof(BankAccount), taskReturn, taskReturn.FirstOrDefault().statusCode, _baseLocalizer, _localizer));
                 }
@@ -68,8 +53,23 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // POST api/wallet/bankaccounts/create
+        [HttpGet("{id}")]
+        [Route("api/wallet/bankaccounts/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                BankAccount taskReturn = await Mediator.Send(new GetSingleBankAccountQuery { BankAccountID = id });
+                return Ok(new BankAccountsResponse(nameof(BankAccount), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+        
         [HttpPost]
+        [Route("api/wallet/bankaccounts/add")]
         public async Task<IActionResult> Create([FromForm] CreateBankAccountCommand command)
         {
             if (ModelState.IsValid)
@@ -83,8 +83,8 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // PUT api/wallet/bankaccounts/update/5
         [HttpPut("{id}")]
+        [Route("api/wallet/bankaccounts/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdateBankAccountCommand command)
         {
             if (ModelState.IsValid)
@@ -98,9 +98,9 @@ namespace API.Controllers.Wallet
                 return BadRequest(ModelState);
             }
         }
-
-        // DELETE api/wallet/bankaccounts/delete/5
+        
         [HttpDelete("{id}")]
+        [Route("api/wallet/bankaccounts/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)

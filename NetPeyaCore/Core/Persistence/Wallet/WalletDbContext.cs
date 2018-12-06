@@ -18,7 +18,6 @@ namespace Core.Persistence.Wallet
         public DbSet<WalletAccountCategory> WalletAccountCategories { get; set; }
         public DbSet<WalletAccount> WalletAccounts { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
-        public DbSet<CardType> CardTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Recipient> Recipients { get; set; }
         public DbSet<SavedCard> SavedCards { get; set; }

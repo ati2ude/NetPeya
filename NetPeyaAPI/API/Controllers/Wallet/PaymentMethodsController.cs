@@ -29,23 +29,8 @@ namespace API.Controllers.Wallet
             _baseLocalizer = baseLocalizer;
         }
 
-        // GET api/wallet/paymentmethods/get/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                PaymentMethod taskReturn = await Mediator.Send(new GetSinglePaymentMethodQuery { ID = id });
-                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        // GET api/wallet/paymentmethods/getall
         [HttpGet]
+        [Route("api/wallet/paymentmethods")]
         public async Task<IActionResult> GetAll()
         {
             if (ModelState.IsValid)
@@ -68,8 +53,23 @@ namespace API.Controllers.Wallet
             }
         }
 
-        // POST api/wallet/paymentmethods/create
+        [HttpGet("{id}")]
+        [Route("api/wallet/paymentmethods/{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                PaymentMethod taskReturn = await Mediator.Send(new GetSinglePaymentMethodQuery { ID = id });
+                return Ok(new PaymentMethodsResponse(nameof(PaymentMethod), taskReturn, taskReturn.statusCode, _baseLocalizer, _localizer));
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+        
         [HttpPost]
+        [Route("api/wallet/paymentmethods/add")]
         public async Task<IActionResult> Create([FromForm] CreatePaymentMethodCommand command)
         {
             if (ModelState.IsValid)
@@ -84,8 +84,8 @@ namespace API.Controllers.Wallet
 
         }
 
-        // PUT api/wallet/paymentmethods/update/5
         [HttpPut("{id}")]
+        [Route("api/wallet/paymentmethods/update/{id}")]
         public async Task<IActionResult> Update(int id, [FromForm] UpdatePaymentMethodCommand command)
         {
             if (ModelState.IsValid)
@@ -99,9 +99,9 @@ namespace API.Controllers.Wallet
                 return BadRequest(ModelState);
             }
         }
-
-        // DELETE api/wallet/paymentmethods/delete/5
+        
         [HttpDelete("{id}")]
+        [Route("api/wallet/paymentmethods/delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (ModelState.IsValid)
